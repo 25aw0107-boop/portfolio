@@ -1,3 +1,14 @@
+/* 强制浏览器始终显示滚动条占位符 */
+html {
+  scrollbar-gutter: stable;
+}
+
+/* 外层容器 */
+#about {
+  scroll-margin-top: 80px;
+  /* 不加这个的话，heder的导航效果就会跳转到少一块图片的位置 */
+}
+
 /* 强制全局隐藏原生指针 */
 * {
   cursor: none !important;
