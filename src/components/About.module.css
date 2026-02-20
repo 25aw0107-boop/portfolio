@@ -1,0 +1,246 @@
+.aboutSection {
+    max-width: 900px;
+
+    /* 👇 核心修改在这里：把 margin 拆开写，单独加大 top 的数值 */
+    margin-top: 120px;
+    /* 👈 增加这个数值（比如 200px ~ 300px），距离就拉开了 */
+    margin-bottom: 68px;
+    /* 底部保持原来的距离 */
+    margin-left: auto;
+    /* 保持水平居中 */
+    margin-right: auto;
+    /* 保持水平居中 */
+
+    padding: 0 40px;
+    position: relative;
+    z-index: 10;
+}
+
+/* ==================
+   🌟 左侧水墨装饰
+================== */
+.inkBgRight {
+    position: absolute;
+    z-index: -1;
+    /* 改成 -1 即可，-10 太容易被彻底垫底压死 */
+    pointer-events: none;
+    opacity: 1;
+    transform: rotate(15deg);
+    width: 110%;
+    /* 稍微放大一点，让它更有张力 */
+    height: auto;
+    object-fit: contain;
+    /* 👇 核心修改：用百分比或具体的像素，不要用 vh，防止变形乱跑 */
+    top: -128px;
+    left: -40%;
+}
+
+.inkImg {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
+/* ==================
+   1. 标题区域样式
+================== */
+.titleWrapper {
+    position: relative;
+    margin-bottom: 60px;
+    display: inline-block;
+    /* 让容器大小贴合文字 */
+}
+
+/* 标题背后的水墨背景 */
+.titleBg {
+    position: absolute;
+    top: 50%;
+    left: 0%;
+    transform: translate(-50%, -50%);
+    width: 460px;
+    /* 现在你随便改，哪怕 800px 都能生效了 */
+
+    /* 👇 核心魔法：解除全局图片的宽度限制 */
+    max-width: none;
+
+    z-index: -1;
+    opacity: 0.9;
+}
+
+.title {
+    font-size: 38px;
+    font-family: "Hiragino Mincho ProN", "Yu Mincho", "Noto Serif JP", serif;
+    color: #000;
+    margin: 0;
+    letter-spacing: 5px;
+}
+
+/* ==================
+   2. 内容排版 (Flexbox)
+================== */
+.content {
+    display: flex;
+    gap: 60px;
+    /* 左右两栏的间距 */
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+/* 左侧文字区 */
+.textContent {
+    flex: 1;
+    /* 占据剩余的所有空间 */
+}
+
+.nameBlock {
+    margin-bottom: 30px;
+}
+
+.furigana {
+    font-size: 14px;
+    color: #666;
+    letter-spacing: 12px;
+    /* 拉开注音的间距以对齐汉字 */
+    display: block;
+    margin-bottom: 5px;
+    margin-left: 26px;
+
+}
+
+.name {
+    font-size: 28px;
+    font-family: "Hiragino Mincho ProN", "Yu Mincho", "Noto Serif JP", serif;
+    margin: 0;
+    letter-spacing: 12px;
+    /* 拉开汉字的间距 */
+    margin-left: 36px;
+}
+
+.description {
+    font-size: 15px;
+    line-height: 2.2;
+    /* 日文排版通常需要较大的行高 */
+    color: #444;
+    text-align: justify;
+    /* 两端对齐，边缘更整齐 */
+}
+
+.description p {
+    margin-bottom: 15px;
+}
+
+/* 右侧图片区 */
+.imageContent {
+    width: 256px;
+    flex-shrink: 0;
+    overflow: hidden;
+    box-shadow:
+        0 20px 60px rgba(7, 37, 26, 0.3);
+}
+
+
+.profileImg {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 4px;
+    /* 加一点微小的圆角，更柔和 */
+}
+
+
+
+/* ==================
+📱 移动端响应式 (日式杂志风：左上竖排，右上图，下正文)
+================== */
+@media (max-width: 768px) {
+
+    .aboutSection {
+        margin-top: 100px;
+        padding: 0 50px;
+        margin-top: 60px;
+        margin-bottom: 0px;
+    }
+
+    /* 🌟 把跑到屏幕外面的水墨背景拉回来！ */
+    .inkBgRight {
+        width: 100%;
+        /* 手机端背景可以放大，当作整版的底纹 */
+        top: 0%;
+        /* 贴近顶部 */
+        left: -5%;
+        /* 调整水平偏移，让水墨最好看的部分露出来 */
+        transform: none;
+    }
+
+    .title {
+        font-size: 28px;
+    }
+
+    .titleWrapper {
+        text-align: center;
+        display: block;
+    }
+
+    .titleBg {
+        width: 280px;
+        left: 25%;
+    }
+
+
+    /* 🌟 核心魔法 1：开启 Grid 网格布局 */
+    .content {
+        display: grid;
+        /* 🌟 修改点 1：把 1fr 改成 auto。让姓名列只占它需要的宽度，不要撑满 */
+        grid-template-columns: auto 190px;
+        grid-template-areas:
+            "name image"
+            "desc desc";
+        gap: 16px 30px;
+        /* 上下间距 30px，左右图文间距 20px */
+    }
+
+    /* 🌟 核心魔法 2：消除外层包裹！
+       让里面的 nameBlock 和 description 直接作为独立的积木参与 Grid 排列 */
+    .textContent {
+        display: contents;
+    }
+
+    /* === 1. 左上：竖排名字 === */
+    .nameBlock {
+        grid-area: name;
+        writing-mode: vertical-rl;
+        /* 🌟 核心魔法 3：强制竖排文字（从右向左换行） */
+        margin: 0;
+    }
+
+    .furigana {
+        margin-bottom: 0;
+        letter-spacing: 6px;
+        /* 竖排时的注音字间距 */
+        /* 💡 提示：在竖排模式下，原本 HTML 写在前面的元素会自动排在右边。
+           所以 furigana 会非常漂亮地贴在 name 的右侧！ */
+    }
+
+    .name {
+        margin: 0;
+        letter-spacing: 12px;
+    }
+
+    /* === 2. 右上：照片 === */
+    .imageContent {
+        grid-area: image;
+        width: 140px;
+        /* 控制照片在手机端的大小，精致小巧 */
+        margin: 0;
+    }
+
+    /* === 3. 下方：文字介绍 === */
+    .description {
+        grid-area: desc;
+        width: 100%;
+        font-size: 14px;
+        line-height: 2;
+        text-align: left;
+        /* 由于上面的网格居中了，正文也会跟着变窄并居中，这样视觉上更统一 */
+    }
+}

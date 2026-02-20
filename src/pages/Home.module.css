@@ -1,0 +1,333 @@
+.page {
+    min-height: 100vh;
+}
+
+body {
+    overflow-x: hidden;
+    /* 🌟 仅隐藏横向溢出，彻底消灭右侧白边 */
+    width: 100%;
+    position: relative;
+}
+
+/* Hero 区块 */
+.hero {
+    position: relative;
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+    background: #f6fbff;
+}
+
+/* =========================================
+   👇 新增部分：左侧装饰与四周水墨 
+========================================= */
+
+/* 两侧水墨背景容器 */
+.inkBgLeft,
+.inkBgRight {
+    position: absolute;
+    z-index: 1;
+    /* 保证在最底层背景之上，但在中间挂轴之下 */
+    pointer-events: none;
+    width: 90vw;
+    /* 占据屏幕大约一半宽，可根据素材大小微调 */
+    max-width: 1080px;
+    /* 防止在大屏上无限放大 */
+    opacity: 1;
+    /* 若素材颜色过深可降低透明度 */
+}
+
+/* 左上角水墨 */
+.inkBgLeft {
+    /* 魔法公式：以屏幕正中间 (50vw) 为基准线。
+       + 80px 的意思是：把图片的右侧边缘，放在中线往左 80px 的位置。
+       这样不管屏幕多宽，它和中间挂轴的咬合关系永远固定！ */
+    bottom: 10vh;
+    right: calc(50vw + 80px);
+
+    /* 顺便把 top 的百分比改成固定视口高度，防止屏幕极高时乱跑 */
+
+}
+
+/* 右下角水墨 (使用旋转让同一张图产生对称感) */
+.inkBgRight {
+    /* 魔法公式：把图片的左侧边缘，放在屏幕中线往右 80px 的位置。 */
+    top: -15vh;
+    left: calc(50vw + 80px);
+    transform: rotate(160deg);
+}
+
+/* 水墨图片通用属性 */
+.inkImg {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
+/* 左侧装饰文字整体容器 */
+.leftDecor {
+    position: absolute;
+    /* 👇 魔法公式：屏幕左边缘与挂轴左边缘的绝对中点 */
+    left: calc(25vw - 119px);
+    /* 👇 关键：让文字内容自身的中心，对齐到上面算出来的中点 */
+    transform: translateX(-50%);
+
+    top: 22vh;
+    z-index: 5;
+    display: flex;
+    flex-direction: row-reverse;
+    gap: 15px;
+    color: #ffffff;
+    font-family: "Hiragino Mincho ProN", "Yu Mincho", "Noto Serif JP", serif;
+    text-shadow: 0 2px 15px rgb(6, 76, 110);
+    user-select: none;
+}
+
+/* ==========================================
+   🚨 强烈建议加上这段响应式处理
+   当屏幕非常窄（比如手机或小平板）时，左边已经没有足够空间了
+========================================== */
+@media (max-width: 850px) {
+    .leftDecor {
+        /* 空间不够时直接隐藏，或者你可以改成其它样式 */
+        display: none;
+    }
+}
+
+/* 第一列文字（右边）：ポートフォリオ */
+.decorCol {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    font-size: 26px;
+    letter-spacing: 0.4em;
+    opacity: 0.9;
+}
+
+/* 第二列文字（左边）：僕の */
+.decorColSub {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    font-size: 30px;
+    letter-spacing: 0.3em;
+    margin-top: 45px;
+    /* ✅ 关键：让“僕の”往下沉一点，形成错落有致的排版 */
+    opacity: 0.8;
+}
+
+
+
+
+/* =========================================
+   1. 中间挂轴（舞台）主容器
+   （也就是屏幕中间那块白色的长条区域）
+========================================= */
+.stage {
+    position: relative;
+    /* 宽度限制：最大 476px，屏幕变窄时自动缩小 */
+    width: min(476px, 100vw);
+    /* 高度至少占满一整个屏幕 */
+    min-height: 100vh;
+    background-color: #f6fbff;
+    /* 给白色挂轴加一点阴影，让它立体地浮在淡蓝色背景上 */
+    box-shadow: 0 -12px 40px rgba(0, 0, 0, 0.08);
+    z-index: 10;
+}
+
+/* =========================================
+   2. 挂轴里的“背景图容器”
+   （用来装天空和山脉这两张图的隐形盒子）
+========================================= */
+.heroBg {
+    position: absolute;
+    inset: 0;
+    /* 让这个盒子铺满整个挂轴 */
+    z-index: 0;
+    /* 层级设为 0，乖乖呆在最底层当背景 */
+    pointer-events: none;
+    /* 让鼠标穿透它，防止挡住文字复制 */
+}
+
+/* --- 2.1 顶部的天空图 --- */
+.bgSky {
+    position: absolute;
+    top: 0;
+    /* 贴在挂轴最上面 */
+    left: 50%;
+    transform: translateX(-50%);
+    /* 水平居中 */
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    user-select: none;
+    /* 防止图片被鼠标拖拽选中 */
+}
+
+/* --- 2.2 底部的山脉图 --- */
+.bgMount {
+    position: absolute;
+    bottom: 0;
+    /* 贴在挂轴最下面 */
+    left: 50%;
+    transform: translateX(-50%);
+    /* 水平居中 */
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    user-select: none;
+}
+
+@media (max-width: 768px) {
+
+    /* --- 底部的山脉图放大 --- */
+    .bgMount {
+        width: 180%;
+        /* 🌟 核心魔法：突破 100%，让图片强制放大。你可以根据感觉改成 150% 或 200% */
+        max-width: none;
+        /* 确保不会被其他的最大宽度规则限制 */
+    }
+}
+
+/* =========================================
+   3. 挂轴里的“内容容器”
+   （用来装最上面那个红色的 Logo/印章，以及下面的竖排字）
+========================================= */
+.heroInner {
+    position: absolute;
+    inset: 0;
+    /* 同样铺满整个挂轴 */
+    z-index: 1;
+    /* 层级为 1，盖在天空和山脉上面 */
+
+    /* 使用 Flex 布局把印章和文字从上到下居中排列 */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: clamp(40px, 5vh, 60px);
+    /* 印章和竖排文字之间的距离 */
+    padding: 60px 16px;
+    transform: translateY(-8%);
+    /* 把整体内容稍微往上提一点，视觉重心更好看 */
+}
+
+/* =========================================
+   4. 顶部的红色 Logo（印章）区域
+========================================= */
+.seal {
+    width: 86px;
+    height: 86px;
+    display: grid;
+    place-items: center;
+    /* 让图片在格子里完美居中 */
+    flex-shrink: 0;
+    /* 防止屏幕变矮时印章被压扁 */
+}
+
+/* 印章图片本身 */
+.sealImg {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    /* 保证图片比例不失真 */
+}
+
+/* =========================================
+   5. 竖排大标题区域
+   （思い伝え ユーザーの心 動かす仕事）
+========================================= */
+.vTitle {
+    margin: 0;
+    writing-mode: vertical-rl;
+    /* 🌟 核心魔法：让文字变成从右到左的竖排排版 */
+    text-orientation: mixed;
+    font-family: "Hiragino Mincho ProN", "Yu Mincho", "Noto Serif JP", serif;
+    /* 优雅的明朝体/宋体 */
+    font-size: clamp(24px, 4.5vw, 34px);
+    /* 字体大小会根据屏幕自适应 */
+    line-height: 1.5;
+    letter-spacing: 0.16em;
+    /* 字间距拉开，更有呼吸感 */
+    color: rgba(20, 35, 50, 0.84);
+    /* 深藏青色，比纯黑更有质感 */
+    user-select: none;
+}
+
+/* 竖排标题里的每一列文字（比如“思い伝え”是一列） */
+.col {
+    display: inline-block;
+}
+
+/* 强调色（专门用来给你那个红色的“心”字上色的） */
+.accent {
+    color: rgba(180, 34, 34, 0.95);
+    /* 砖红色 */
+    font-weight: 700;
+    /* 加粗 */
+}
+
+
+/* 🌟 全屏白色遮罩：开场即刻开始消失 */
+.whiteOverlay {
+    position: fixed;
+    inset: 0;
+    background: white;
+    backdrop-filter: blur(20px);
+    z-index: 999;
+    pointer-events: none;
+
+    /* 1.5秒完成从白模糊到全透明的切换，开场即动 */
+    animation: revealClear 1.5s ease-out forwards;
+}
+
+@keyframes revealClear {
+    0% {
+        opacity: 1;
+        backdrop-filter: blur(20px);
+    }
+
+    100% {
+        opacity: 0;
+        backdrop-filter: blur(0px);
+        visibility: hidden;
+        /* 动画结束彻底移除，防止干扰 */
+    }
+}
+
+/* 🌟 三句话的升起动画：配合遮罩，更早开始出现 */
+.col {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: colRise 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+/* 调小延迟时间，让文字在遮罩变淡的中途就弹出来 */
+.col:nth-of-type(1) {
+    animation-delay: 0.3s;
+}
+
+.col:nth-of-type(2) {
+    animation-delay: 0.6s;
+}
+
+.col:nth-of-type(3) {
+    animation-delay: 0.9s;
+}
+
+@keyframes colRise {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 确保背景层静止且不卡顿 */
+.heroBg,
+.inkBgLeft,
+.inkBgRight,
+.stage {
+    animation: none;
+    filter: none;
+    opacity: 1;
+}

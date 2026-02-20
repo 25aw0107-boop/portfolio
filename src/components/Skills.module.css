@@ -1,0 +1,361 @@
+/* ==================
+   整体容器与标题
+================== */
+.skillsSection {
+    position: relative;
+    width: 100%;
+    padding: 0 20px;
+    overflow: hidden;
+    /* 防止波浪溢出 */
+    margin: auto;
+    margin-top: 40px;
+    margin-bottom: 100px;
+}
+
+.titleWrapper {
+    position: relative;
+    text-align: center;
+    z-index: 10;
+}
+
+
+.title {
+    font-size: 28px;
+    font-family: "Hiragino Mincho ProN", "Yu Mincho", "Noto Serif JP", serif;
+    letter-spacing: 4px;
+    color: #333;
+    margin-bottom: 64px;
+}
+
+/* ==================
+   动画舞台容器
+================== */
+.stage {
+    position: relative;
+    width: 100%;
+    height: 300px;
+    /* 控制海浪区域的高度 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 200px;
+}
+
+/* ==================
+   动态波浪 (纯 CSS + SVG Data URI)
+================== */
+.waveLayer {
+    position: absolute;
+    bottom: 150px;
+    width: 100%;
+    height: 150px;
+    z-index: 1;
+    /* 后景 */
+    pointer-events: none;
+}
+
+.foregroundWaves {
+    z-index: 3;
+    /* 前景：用来遮挡一点点船身，产生真实感 */
+    bottom: 15%;
+    opacity: 0.8;
+}
+
+/* 波浪基础样式 */
+.wave {
+    position: absolute;
+    width: 200%;
+    /* 两倍宽，用来实现无缝滚动动画 */
+    height: 100%;
+    /* 这是一条黑色的正弦曲线 SVG，被我转换成了背景图 */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 100' preserveAspectRatio='none'%3E%3Cpath d='M0,50 Q200,100 400,50 T800,50' fill='none' stroke='%23333333' stroke-width='1.5'/%3E%3C/svg%3E");
+    background-size: 50% 100%;
+    /* 让800px的SVG重复显示 */
+    background-repeat: repeat-x;
+}
+
+/* 为每条波浪设置不同的高度、透明度、动画时间和方向 */
+.wave1 {
+    top: 0;
+    opacity: 0.5;
+    animation: flowLeft 20s linear infinite;
+}
+
+.wave2 {
+    top: 20px;
+    opacity: 0.3;
+    animation: flowRight 25s linear infinite;
+    transform: scaleY(1.2);
+}
+
+.wave3 {
+    top: 40px;
+    opacity: 0.6;
+    animation: flowLeft 15s linear infinite;
+}
+
+.wave4 {
+    top: 60px;
+    opacity: 0.4;
+    animation: flowRight 18s linear infinite;
+    transform: scaleY(0.8);
+}
+
+@keyframes flowLeft {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-50%);
+    }
+
+    /* 往左移出一半，实现无缝衔接 */
+}
+
+@keyframes flowRight {
+    0% {
+        transform: translateX(-50%);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
+/* ==================
+   小船与技能主体
+================== */
+.boatAndSkills {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    /* 夹在前后浪之间 */
+    pointer-events: none;
+    /* 让鼠标透过层 */
+}
+
+/* 小船摇晃与浮动动画 */
+.boat {
+    position: absolute;
+    left: 50%;
+    bottom: 25%;
+    /* 把它放在波浪中间 */
+    margin-left: -80px;
+    /* 宽度一半，使其居中。根据你实际图片尺寸调整 */
+    width: 160px;
+    height: auto;
+    animation: boatRock 4s ease-in-out infinite;
+}
+
+@keyframes boatRock {
+
+    0%,
+    100% {
+        transform: translateY(0) rotate(-2deg);
+    }
+
+    50% {
+        transform: translateY(-15px) rotate(2deg);
+    }
+}
+
+/* ==================
+   技能文字群组
+================== */
+.skillGroup {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    animation: floatBob 6s ease-in-out infinite;
+    font-family: "Hiragino Mincho ProN", "Yu Mincho", "Noto Serif JP", serif;
+    color: #333;
+}
+
+/* 错开三个群组的浮动节奏，显得更自然 */
+.groupCoding {
+    top: 40%;
+    position: absolute;
+    /* 👇 魔法公式：屏幕左边缘与挂轴左边缘的绝对中点 */
+    left: calc(25vw - 119px);
+    /* 👇 关键：让文字内容自身的中心，对齐到上面算出来的中点 */
+    transform: translateX(-50%);
+    animation-delay: 0s;
+}
+
+.groupDesign {
+    top: 30%;
+    right: 20vw;
+    animation-delay: -2s;
+}
+
+.groupEditing {
+    bottom: -20%;
+    left: 50%;
+    transform: translateX(-50%);
+    animation-delay: -4s;
+}
+
+@keyframes floatBob {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+/* 注意：因为 groupEditing 本身需要 translateX(-50%) 居中，所以要单独给它写个动画 */
+.groupEditing {
+    animation: floatBobCenter 6s ease-in-out infinite;
+}
+
+@keyframes floatBobCenter {
+
+    0%,
+    100% {
+        transform: translate(-50%, 0);
+    }
+
+    50% {
+        transform: translate(-50%, -10px);
+    }
+}
+
+/* 主技能文字 */
+.mainSkill {
+    font-size: 32px;
+    font-weight: bold;
+    letter-spacing: 6px;
+    white-space: nowrap;
+}
+
+/* 子技能文字 (绝对定位围绕四周) */
+.subSkill {
+    position: absolute;
+    font-size: 16px;
+    font-family: Arial, Helvetica, sans-serif;
+    /* 英文技能用无衬线体更现代 */
+    color: #555;
+    white-space: nowrap;
+}
+
+/* 纯手工微调散落位置，模拟设计图的随意感 (如果位置不准，你可以微调这里的数值) */
+/* Coding 组 */
+/* html */
+.pos1 {
+    top: -25px;
+    left: 30px;
+}
+
+/* js */
+.pos2 {
+    top: -25px;
+    right: 30px;
+}
+
+/* css */
+.pos3 {
+    bottom: -25px;
+    left: 0px;
+}
+
+/* react */
+.pos4 {
+    bottom: -25px;
+    right: 30;
+}
+
+
+
+/* Design 组 */
+/* Figma */
+.pos5 {
+    top: -30px;
+    left: 20px;
+}
+
+/* ps */
+.pos6 {
+    bottom: -25px;
+    left: -40px;
+}
+
+/* ai */
+.pos7 {
+    bottom: -25px;
+    right: -30px;
+}
+
+
+
+/* Editing 组 */
+/* Pr */
+.pos8 {
+    top: -25px;
+    left: -60px;
+}
+
+/* Ae */
+.pos9 {
+    top: -23px;
+    right: -60px;
+}
+
+/* CapCut */
+.pos10 {
+    bottom: -20px;
+    left: 20px;
+}
+
+
+
+/* ==================
+   移动端响应式调整
+================== */
+@media (max-width: 768px) {
+    .skillsSection {
+        margin-top: 0px;
+        margin-bottom: 36px;
+    }
+
+    .stage {
+        height: 300px;
+    }
+
+    .boat {
+        bottom: 15%;
+        width: 180px;
+        margin-left: -76px;
+    }
+
+    .mainSkill {
+        font-size: 20px;
+    }
+
+    .subSkill {
+        font-size: 12px;
+    }
+
+    /* 手机上为了防重叠，把组的位置重新排版，稍微上下错开 */
+    .groupCoding {
+        top: 35%;
+        left: 5%;
+    }
+
+    .groupDesign {
+        top: 30%;
+        right: 5%;
+    }
+
+    .groupEditing {
+        bottom: -10%;
+        left: 50%;
+    }
+}

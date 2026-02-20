@@ -1,0 +1,440 @@
+/* ==================
+   整体容器
+================== */
+
+.worksSection {
+    position: relative;
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 80px 20px;
+}
+
+/* ==================
+   背景水墨装饰
+================== */
+.inkTopRight,
+.inkBottomLeft {
+    position: absolute;
+    z-index: -20;
+    pointer-events: none;
+    opacity: 1;
+    width: 1160px;
+    max-width: 120vw;
+}
+
+.inkTopRight {
+    top: -15%;
+    right: -85%;
+    width: 1360px;
+    transform: rotate(-15deg);
+}
+
+.inkBottomLeft {
+    bottom: -10%;
+    left: -60%;
+    transform: scaleX(-1) rotate(10deg);
+}
+
+/* ==================
+   标题区域
+================== */
+.titleWrapper {
+    position: relative;
+    margin-bottom: 80px;
+    z-index: 10;
+    margin-left: 20%;
+}
+
+/* 标题背后的水墨背景 */
+.titleBg {
+    position: absolute;
+    top: 50%;
+    left: 0%;
+    /* 保证背景也是水平居中 */
+    transform: translate(-50%, -50%);
+    width: 460px;
+    max-width: none;
+    z-index: -1;
+    opacity: 0.9;
+    /* 🌟 核心修复：让鼠标点击穿透图片，直接点到下面的文字 */
+    pointer-events: none;
+}
+
+.title {
+    font-size: 38px;
+    font-family: "Hiragino Mincho ProN", "Yu Mincho", "Noto Serif JP", serif;
+    color: #000;
+    margin: 0;
+    letter-spacing: 5px;
+}
+
+/* ==================
+   作品列表
+================== */
+.worksList {
+    display: flex;
+    flex-direction: column;
+    gap: 68px;
+}
+
+/* 单个项目容器 */
+.workItem {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 60px;
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+}
+
+.workItem.reverse {
+    flex-direction: row-reverse;
+}
+
+/* ==================
+   文字信息区块
+================== */
+.textContent {
+    flex: 1;
+    max-width: 400px;
+}
+
+.tag {
+    color: #a0dbdf;
+    font-size: 14px;
+    font-weight: bold;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.workTitle {
+    font-size: 24px;
+    color: #333;
+    margin: 0 0 15px 0;
+    padding-bottom: 10px;
+    position: relative;
+}
+
+/* 🌟 标题下划线：默认状态宽度为 0 */
+.workTitle::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 1px;
+    background-color: #333;
+    transition: width 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* 🌟 鼠标悬停卡片时：标题下划线从左往右伸长到 100% */
+.workItem:hover .workTitle::after {
+    width: 100%;
+}
+
+.workDesc {
+    font-size: 14px;
+    line-height: 1.8;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.role {
+    color: #e0e0e0;
+    font-size: 14px;
+    display: block;
+    margin-bottom: 30px;
+}
+
+/* 详情文字 */
+.detailLink {
+    font-size: 12px;
+    color: #999;
+    border-bottom: 1px solid #999;
+    padding-bottom: 2px;
+    float: right;
+    transition: opacity 0.3s;
+}
+
+.workItem:hover .detailLink {
+    opacity: 0.6;
+}
+
+/* ==================
+   图片双层圆环 & 射线区块
+================== */
+.imageWrapper {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+
+/* 外层细线圆环 */
+.imageOuterCircle {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    border: 1px solid #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 10px 40px rgba(160, 219, 223, 0.4), 0 5px 15px rgba(0, 0, 0, 0.05);
+    transition: border-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+.workItem:hover .imageOuterCircle {
+    border-color: #a0dbdf;
+    box-shadow: 0 15px 50px rgba(160, 219, 223, 0.6), 0 5px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* 左右两根横线 */
+.imageOuterCircle::before,
+.imageOuterCircle::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 80px;
+    height: 1px;
+    background-color: #333;
+    transform: translateY(-50%);
+    transition: background-color 0.4s ease;
+}
+
+.workItem:hover .imageOuterCircle::before,
+.workItem:hover .imageOuterCircle::after {
+    background-color: #a0dbdf;
+}
+
+.imageOuterCircle::before {
+    right: 100%;
+}
+
+.imageOuterCircle::after {
+    left: 100%;
+}
+
+/* 内层真实图片 */
+.workImage {
+    width: 270px;
+    height: 270px;
+    border-radius: 50%;
+    object-fit: cover;
+    transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.workItem:hover .workImage {
+    transform: scale(1.105);
+}
+
+/* ==================
+   底部查看全部按钮
+================== */
+.viewAllWrapper {
+    text-align: center;
+    margin-top: 60px;
+}
+
+.viewAllBtn {
+    display: inline-flex;
+    align-items: center;
+    gap: 15px;
+    text-decoration: none;
+    color: #a0dbdf;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.viewAllText {
+    transition: color 0.3s ease;
+}
+
+.viewAllBtn:hover .viewAllText {
+    color: rgb(54, 184, 190);
+}
+
+.arrowCircle {
+    width: 86px;
+    height: 86px;
+    border-radius: 50%;
+    border: 1px solid #e0e0e0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+.viewAllBtn:hover .arrowCircle {
+    background-color: #a0dbdf;
+    border-color: #a0dbdf;
+}
+
+.arrow {
+    font-size: 20px;
+    font-weight: 300;
+    transition: color 0.3s ease;
+}
+
+.viewAllBtn:hover .arrow {
+    color: #ffffff;
+}
+
+/* =========================================
+   📱 手机端适配 (Max-width: 768px)
+========================================= */
+@media (max-width: 768px) {
+    .worksSection {
+        padding: 60px 20px;
+        /* 防止超宽的水墨把手机屏幕撑出横向滚动条 */
+        overflow: hidden;
+    }
+
+    /* 🌟 把两个水墨装饰拿回来，并调整为手机版的底纹模式 */
+    .inkTopRight,
+    .inkBottomLeft {
+        display: block;
+        /* 覆盖之前的 none，让它们显示出来 */
+        z-index: -1;
+        /* 提上来一点，防止被彻底压在白底下面 */
+        opacity: 1;
+        /* 调低透明度！手机上字和图很满，水墨太深会看不清内容 */
+        width: 180%;
+        /* 用百分比自适应手机屏幕 */
+        max-width: none;
+    }
+
+    .inkTopRight {
+        top: 5%;
+        right: -67%;
+        transform: rotate(-15deg);
+    }
+
+    .inkBottomLeft {
+        bottom: 0%;
+        left: -70%;
+        transform: scaleX(-1) rotate(10deg);
+    }
+
+    .titleWrapper {
+        margin-bottom: 50px;
+        text-align: center;
+    }
+
+    .titleBg {
+        width: 280px;
+        left: 10%;
+        /* 修正回正中心 */
+    }
+
+    .title {
+        font-size: 28px;
+        text-align: left;
+        margin-left: 20px;
+    }
+
+    /* 列表与卡片结构 (图上文下) */
+    .worksList {
+        gap: 46px;
+    }
+
+    .workItem,
+    .workItem.reverse {
+        width: 100%;
+        /* 确保撑满屏幕 */
+        flex-direction: column-reverse;
+        /* 图片在上，文字在下 */
+        align-items: center;
+        /* 整体居中 */
+        justify-content: center;
+        gap: 16px;
+    }
+
+    /* 🌟 文字区块终极居中魔法（增加了选择器权重并清空 PC 端外边距） */
+    .workItem .textContent,
+    .workItem.reverse .textContent {
+        width: 100%;
+        max-width: 320px;
+        margin: 0 auto !important;
+        /* 强制整体水平居中 */
+        padding: 0 !important;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        /* 内部文字靠左 */
+        text-align: left;
+    }
+
+    .tag {
+        font-size: 13px;
+        letter-spacing: 1px;
+        margin-bottom: 8px;
+    }
+
+    .workTitle {
+        font-size: 20px;
+        letter-spacing: 2px;
+        margin-bottom: 12px;
+        padding-bottom: 6px;
+        width: 100%;
+    }
+
+    .workTitle::after {
+        left: 0;
+        transform: none;
+    }
+
+    .workDesc {
+        font-size: 13px;
+        line-height: 1.8;
+        color: #666;
+        margin-bottom: 20px;
+    }
+
+    .role {
+        display: none;
+    }
+
+    .detailLink {
+        float: none;
+        align-self: flex-start;
+        font-size: 13px;
+        color: #666;
+        border-bottom: 1px solid #666;
+        padding-bottom: 4px;
+        margin-top: 0;
+    }
+
+    /* 图片与射线区块 */
+    .imageOuterCircle {
+        width: 240px;
+        height: 240px;
+    }
+
+    .imageOuterCircle::before,
+    .imageOuterCircle::after {
+        display: block;
+        width: 30px;
+    }
+
+    .workImage {
+        width: 217px;
+        height: 217px;
+    }
+
+    /* 底部按钮 */
+    .viewAllWrapper {
+        margin-top: 36px;
+    }
+
+    .arrowCircle {
+        width: 66px;
+        height: 66px;
+    }
+
+    .arrow {
+        font-size: 18px;
+    }
+}
