@@ -6,7 +6,7 @@ import inkTitleBg from '../assets/标题背景色.png';
 // 導入大塊背景水墨
 import bgInk from '../assets/背景水墨.png';
 import shinkyuImg from '../assets/進級制作.png';
-import portfolioImg from '../assets/ポートフォリオ.png';
+import portfolioImg from '../assets/ポートフォリオ.jpg';
 import zenkiImg from '../assets/前期課題.png';
 
 // モックデータ
