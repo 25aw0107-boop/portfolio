@@ -4,7 +4,16 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700&display=swap');
 
+/* 强制所有元素以 border-box 计算，防止 padding 撑开宽度 */
+* {
+  box-sizing: border-box;
+}
 
+/* 解决切换视口时的偏移 */
+html {
+  scrollbar-gutter: stable;
+  /* 针对 Webkit 内核（Chrome/Edge）的滚动条优化 */
+}
 
 *,
 *::before,

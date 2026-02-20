@@ -1,6 +1,25 @@
-/* 强制浏览器始终显示滚动条占位符 */
 html {
+  /* 🌟 核心：永远保留滚动条空间，防止布局随滚动条出现而平移 */
   scrollbar-gutter: stable;
+  /* 确保 HTML 高度至少是 100%，防止高度计算异常 */
+  height: 100%;
+}
+
+/* 针对 HTML 和 Body 也要双重保险 */
+html,
+body {
+  cursor: none !important;
+  margin: 0;
+  padding: 0;
+  /* 确保页面永远不会因为背景图太大而产生横向滚动条 */
+  overflow-x: hidden;
+  width: 100%;
+  position: relative;
+}
+
+#root {
+  overflow-x: hidden;
+  width: 100%;
 }
 
 /* 外层容器 */
@@ -12,12 +31,4 @@ html {
 /* 强制全局隐藏原生指针 */
 * {
   cursor: none !important;
-}
-
-/* 针对 HTML 和 Body 也要双重保险 */
-html,
-body {
-  cursor: none !important;
-  margin: 0;
-  padding: 0;
 }
