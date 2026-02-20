@@ -271,26 +271,26 @@ body {
 .whiteOverlay {
     position: fixed;
     inset: 0;
-    background: white;
-    backdrop-filter: blur(20px);
+    background: rgba(255, 255, 255, 1);
+    /* 初始全白，不透明 */
     z-index: 999;
-    pointer-events: none;
 
-    /* 1.5秒完成从白模糊到全透明的切换，开场即动 */
-    animation: revealClear 1.5s ease-out forwards;
+    /* 🌟 修改点 1: 时长增加到 2.5s */
+    /* 🌟 修改点 2: 曲线改为 ease-in-out，让消失的过程更平均、更柔和 */
+    animation: reveal 1.5s ease-in-out forwards;
+
+    will-change: opacity;
+    pointer-events: none;
 }
 
-@keyframes revealClear {
+@keyframes reveal {
     0% {
         opacity: 1;
-        backdrop-filter: blur(20px);
     }
 
     100% {
         opacity: 0;
-        backdrop-filter: blur(0px);
         visibility: hidden;
-        /* 动画结束彻底移除，防止干扰 */
     }
 }
 

@@ -130,14 +130,42 @@
 }
 
 /* 右侧图片区 */
+/* 🌟 初始状态：隐藏并在下方 50px 的位置 */
 .imageContent {
     width: 256px;
     flex-shrink: 0;
     overflow: hidden;
-    box-shadow:
-        0 20px 60px rgba(7, 37, 26, 0.3);
+    box-shadow: 0 20px 60px rgba(7, 37, 26, 0.3);
+
+    opacity: 0;
+    transform: translateY(50px);
+
+    /* 🌟 核心：过渡动画设置 */
+    /* 使用 cubic-bezier(0.22, 1, 0.36, 1) 实现由快到缓的“呼吸感” */
+    transition:
+        opacity 1.2s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+
+    will-change: transform, opacity;
+    /* 告诉浏览器提前开启硬件加速 */
 }
 
+/* 🌟 激活状态：当 isVisible 为 true 时触发 */
+.reveal {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* 兼容移动端的图片样式（保持你之前的设置即可） */
+@media (max-width: 768px) {
+    .imageContent {
+        grid-area: image;
+        width: 140px;
+        margin: 0;
+        /* 移动端可以稍微调快一点点，让反应更灵敏 */
+        transition-duration: 0.8s;
+    }
+}
 
 .profileImg {
     width: 100%;

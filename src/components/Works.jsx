@@ -30,7 +30,7 @@ const worksData = [
     {
         id: 3,
         tag: '#Website',
-        title: '前期課題・ 学科の発展',
+        title: '前期課題・学科の発展',
         desc: '入学を検討している留学生の学科に対する不安を軽減することを目的として制作したスペシャルサイトです。',
         role: 'Web design',
         img: zenkiImg, // 对应前期課題.png
