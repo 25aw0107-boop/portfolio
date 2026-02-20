@@ -4,9 +4,8 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700&display=swap');
 
-html {
-  scroll-behavior: smooth;
-}
+
+
 
 /* 外层容器 */
 #about {
