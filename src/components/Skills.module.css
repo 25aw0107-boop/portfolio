@@ -68,7 +68,7 @@
     /* 两倍宽，用来实现无缝滚动动画 */
     height: 100%;
     /* 这是一条黑色的正弦曲线 SVG，被我转换成了背景图 */
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 100' preserveAspectRatio='none'%3E%3Cpath d='M0,50 Q200,100 400,50 T800,50' fill='none' stroke='%23333333' stroke-width='1.5'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 200' preserveAspectRatio='none'%3E%3Cpath d='M0,50 Q200,100 400,50 T800,50' fill='none' stroke='%23333333' stroke-width='1.5'/%3E%3C/svg%3E");
     background-size: 50% 100%;
     /* 让800px的SVG重复显示 */
     background-repeat: repeat-x;
@@ -357,5 +357,41 @@
     .groupEditing {
         bottom: -10%;
         left: 50%;
+    }
+
+    .wave {
+        /* 🌟 核心优化：更换一个弧度更平缓的 SVG 路径 */
+        /* 把 Q200,100 改成了 Q200,65，调低了波峰高度 */
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 200' preserveAspectRatio='none'%3E%3Cpath d='M0,50 Q200,65 400,50 T800,50' fill='none' stroke='%23333333' stroke-width='1'/%3E%3C/svg%3E");
+
+        /* 🌟 增加宽度，让波浪在横向上拉得更长，视觉上会更平缓 */
+        background-size: 100% 100%;
+    }
+
+    .waveLayer {
+        /* 手机端波浪整体往上提一点，不要堆在底部 */
+        bottom: 86px;
+    }
+
+    /* 调低波浪之间的错位高度，让它们更聚拢 */
+    .wave2 {
+        top: 10px;
+    }
+
+    .wave3 {
+        top: 40px;
+    }
+
+    .wave4 {
+        top: 70px;
+    }
+
+    /* 手机端动画可以稍微减慢一点，减少视觉干扰 */
+    .wave1 {
+        animation-duration: 25s;
+    }
+
+    .wave3 {
+        animation-duration: 20s;
     }
 }
