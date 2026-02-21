@@ -1,333 +1,166 @@
 /* =============================================
-   FOOTER 完整重写版
-   解决：光晕截断、文字变灰、缩放中断、细节丢失
+   FOOTER 最终精简版
    ============================================= */
 
-/* 1. 外部容器：定义滚动区间 */
+/* 1. 容器：全屏高度，禁止溢出 */
 .footerContainer {
     width: 100%;
-    /* 130vh 提供适中的滚动手感，不会太长导致空白，也不会太短导致动画突兀 */
-    height: 130vh;
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+    /* 🌟 添加这两行，确保容器边缘绝对干净 */
+    margin: 0;
+    padding: 0;
+}
+
+.stickyFrame {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     position: relative;
 }
 
-/* 2. 滚动时间轴追踪器 */
-.scrollTracker {
-    height: 100%;
-    /* 必须定义 view-timeline 供子元素动画使用 */
-    view-timeline-name: --footerTimeline;
-    view-timeline-axis: block;
-}
-
-/* 3. Sticky 框架：让内容在滚动时固定在视口中央 */
-.stickyFrame {
-    position: sticky;
-    top: 0;
-    height: 100vh;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    /* 🌟 关键：overflow: visible 确保光晕放大到几倍大时不会被切边 */
-    overflow: visible;
-}
-
-/* 4. 光晕层样式 */
+/* 2. 背景光晕：超大尺寸并永久居中 */
 .haloLayer {
     position: absolute;
+    width: 100%;
+    height: 100%;
     z-index: 1;
-    /* 确保光晕图层不会拦截鼠标对文字和按钮的点击 */
     pointer-events: none;
 }
 
 .haloImage {
-    width: 500px;
-    /* 🌟 核心：去掉 filter: blur 和 opacity 减淡，保留图片原始颗粒感和深邃色彩 */
-    filter: none;
-    opacity: 1;
-
-    /* 挂载动画：长程缩放 */
-    animation: haloZoom linear forwards;
-    animation-timeline: --footerTimeline;
-    /* 动画从进入视口开始，一直持续到完全滑出，保证放大过程不中断 */
-    animation-range: entry 0% exit 100%;
-    transform-origin: center center;
+    width: 1100px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    /* 核心居中逻辑 */
+    transform: translate(-50%, -50%);
 }
 
-/* 5. 文字与内容层样式 */
+/* 3. 文字内容：初始状态及入场动画 */
 .contentLayer {
     position: relative;
     z-index: 10;
     text-align: center;
+    opacity: 0;
+    transform: scale(0.5) translateY(60px);
+    transition:
+        transform 1.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+        opacity 1.2s ease-out;
+    will-change: transform, opacity;
+}
 
-    /* 🌟 核心双重动画：
-       textFadeIn: 负责快速让文字变黑，解决“变灰”问题。
-       textZoomIn: 负责缓慢放大，维持动态感。 */
-    animation:
-        textFadeIn linear forwards,
-        textZoomIn linear forwards;
-
-    animation-timeline: --footerTimeline, --footerTimeline;
-
-    /* 🌟 核心双重范围：
-       淡入在 entry 10%-30% 极速完成；
-       缩放在 entry 10%-exit 90% 缓慢完成。 */
-    animation-range:
-        entry 10% entry 30%,
-        entry 10% exit 90%;
+/* 激活状态 */
+.active .contentLayer {
+    opacity: 1;
+    transform: scale(1) translateY(0);
 }
 
 .thanksText {
-    font-size: 36px;
+    font-size: 30px;
     font-family: "Hiragino Mincho ProN", "Yu Mincho", serif;
-    color: #000000;
-    /* 强制纯黑，配合 textFadeIn 动画 */
-    margin-bottom: 25px;
-    letter-spacing: 0.08em;
-    /* 🌟 强力蓝绿色大范围投影，增强质感且保护文字轮廓 */
-    text-shadow:
-        0 0 12px rgba(255, 255, 255, 1),
-        /* 第一层白边抠图 */
-        0 0 35px rgba(160, 219, 223, 0.6);
-    /* 第二层环境发光 */
+    color: #000;
+    margin-bottom: 24px;
+    letter-spacing: 0.12em;
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
 }
 
 .subText {
-    font-size: 16px;
-    color: #7e878f;
-    margin-bottom: 45px;
-    text-shadow: 0 0 15px rgba(160, 219, 223, 0.5);
+    font-size: 15px;
+    color: #b1b1b1;
+    margin-bottom: 40px;
 }
 
-/* --- Email 按钮美化版 --- */
+/* 4. Email 按钮：基础及悬停状态 */
 .emailBadge {
     display: inline-flex;
-    /* 改为 flex 方便对齐箭头 */
     align-items: center;
     justify-content: center;
-    background: #ffffff;
-    padding: 18px 70px;
-    /* 稍微调窄一点，给箭头留空间 */
+    background: #fff;
+    padding: 16px 70px;
     border-radius: 60px;
     border: 1.5px solid #c2e9eb;
-    box-shadow: 0 0 30px rgba(160, 219, 223, 0.4);
+    box-shadow: 0 10px 30px rgba(160, 219, 223, 0.3);
     transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-    /* 增加平滑感 */
     cursor: pointer;
-    position: relative;
-    overflow: hidden;
-    /* 确保内容不出框 */
-}
-
-/* Hover 状态：底色变蓝绿 */
-.emailBadge:hover {
-    background-color: #7abcc1;
-    border-color: #7abcc1;
-    /* 向右撑开一点空间给箭头 */
-    box-shadow: 0 10px 40px rgba(122, 188, 193, 0.5);
 }
 
 .emailBadge a {
     text-decoration: none;
     color: #7abcc1;
     font-size: 20px;
-    font-weight: 600;
-    transition: all 0.4s ease;
-    display: flex;
-    align-items: center;
-    position: relative;
-    font-weight: 340;
-
+    font-weight: 300;
+    transition: color 0.4s ease;
 }
 
-/* Hover 状态：文字变白 */
+.emailBadge:hover {
+    background-color: #7abcc1;
+    border-color: #7abcc1;
+    /* 悬停放大 1.05 倍并向上轻微浮动 */
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 15px 45px rgba(122, 188, 193, 0.5);
+}
+
 .emailBadge:hover a {
-    color: #ffffff;
-
+    color: #fff;
 }
 
-
-
-/* =============================================
-   动画帧定义 (Keyframes)
-   ============================================= */
-
-/* 光晕：大幅度放大，营造冲击力 */
-@keyframes haloZoom {
-    from {
-        transform: scale(0.6);
-    }
-
-    to {
-        transform: scale(4.5);
-    }
-}
-
-/* 文字淡入：独立出来，以便快速变黑 */
-@keyframes textFadeIn {
-    from {
-        opacity: 0;
-    }
-
-    to {
-        opacity: 1;
-    }
-}
-
-/* 文字缩放：持续放大的呼吸感 */
-@keyframes textZoomIn {
-    from {
-        transform: scale(0.85);
-    }
-
-    to {
-        transform: scale(1.2);
-    }
-}
-
+/* 5. 版权声明 */
 .copyright {
     position: absolute;
     bottom: 40px;
-    /* 距离底部距离 */
     left: 50%;
     transform: translateX(-50%);
-    font-size: 14px;
-    letter-spacing: 0.1em;
-    color: #7e878f;
-    /* 使用与 subText 类似的灰色 */
-    opacity: 0.8;
-    z-index: 10;
-    font-family: sans-serif;
-    /* 这里的英文字体通常用简单的无衬线体更干净 */
-
-    /* 也可以给它加一个简单的淡入动画，配合整体节奏 */
-    animation: textFadeIn linear forwards;
-    animation-timeline: --footerTimeline;
-    animation-range: entry 20% entry 40%;
+    font-size: 13px;
+    color: #bbb;
+    opacity: 0;
+    transition: opacity 1s ease 1s;
 }
 
+.active .copyright {
+    opacity: 1;
+}
 
-/* ... PC端样式保持不变 ... */
-
+/* 6. 移动端适配 */
 @media (max-width: 768px) {
-
-    /* 1. 容器：回归普通区块，不再占用超长空间 */
     .footerContainer {
         height: auto;
-        min-height: 50vh;
-        /* 给一个最小高度，保证视觉比例舒爽 */
-        padding: 100px 0;
-        /* 上下留白，保持高级感 */
-        position: relative;
-        background-color: #f6fbff;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        overflow: hidden;
-        /* 裁剪超出屏幕的光晕 */
-    }
-
-    /* 2. 停用所有滚动追踪相关的逻辑 */
-    .scrollTracker {
-        view-timeline: none;
-        height: auto;
-    }
-
-    /* 3. 框架：从吸附改为普通居中 */
-    .stickyFrame {
-        position: relative;
-        /* 取消 fixed 或 sticky */
-        width: 100%;
-        height: auto;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        z-index: 5;
-    }
-
-    /* 4. 背景光晕：保留作为背景装饰，但不随滚动变化 */
-    .haloLayer {
-        position: absolute;
-        top: 50%;
-        left: 100%;
-        transform: translate(-50%, -50%);
-        width: 200%;
-        /* 让光晕大一点，铺满背景 */
-        z-index: 1;
-        pointer-events: none;
-        opacity: 1;
+        min-height: 60vh;
+        padding: 80px 20px;
     }
 
     .haloImage {
         width: 100%;
-        max-width: 500px;
-        animation: none;
-        /* 禁用动画 */
-        filter: blur(40px);
-        /* 保持柔和感 */
+        max-width: 400px;
     }
 
-    /* 5. 内容层：垂直排布，文字居中 */
     .contentLayer {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-        opacity: 1;
-        /* 初始即显示 */
-        transform: none;
-        /* 初始即居中 */
-        animation: none;
-        padding: 0 20px;
+        transform: translateY(30px) scale(1);
+    }
+
+    .active .contentLayer {
+        transform: translateY(0);
     }
 
     .thanksText {
-        font-size: 20px;
-        /* 稍微调大一点点，呼应图片里的视觉效果 */
-        font-family: "Hiragino Mincho ProN", serif;
-        color: #142332;
-        margin-bottom: 26px;
-        line-height: 1.5;
-        letter-spacing: 0.05em;
+        font-size: 18px;
     }
 
     .subText {
         font-size: 12px;
-        color: #666;
-        margin-bottom: 48px;
-        letter-spacing: 0.1em;
-    }
-
-    /* 6. 邮件 Badge：保留精致的胶囊形状 */
-    .emailBadge {
-        background: white;
-        padding: 18px 40px;
-        border-radius: 50px;
-        box-shadow: 0 10px 30px rgba(74, 154, 156, 0.12);
-        /* 柔和的阴影 */
-        transition: transform 0.3s ease;
-    }
-
-    .emailBadge a {
-        color: #4a9a9c;
-        font-size: 18px;
-        font-weight: 260;
-        text-decoration: none;
+        color: #b1b1b1;
+        margin-bottom: 40px;
     }
 
     .copyright {
         position: relative;
-        /* 手机端改回相对定位 */
         bottom: 0;
         margin-top: 60px;
-        /* 与上方的 Email 按钮拉开距离 */
         left: 0;
         transform: none;
-        font-size: 12px;
-        color: #999;
-        text-align: center;
-        animation: none;
-        /* 禁用动画 */
-        opacity: 1;
     }
 }

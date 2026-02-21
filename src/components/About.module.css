@@ -10,7 +10,6 @@
     /* 保持水平居中 */
     margin-right: auto;
     /* 保持水平居中 */
-
     padding: 0 40px;
     position: relative;
     z-index: 10;
@@ -54,7 +53,7 @@
 /* 标题背后的水墨背景 */
 .titleBg {
     position: absolute;
-    top: 50%;
+    top: 60%;
     left: 0%;
     transform: translate(-50%, -50%);
     width: 460px;
@@ -73,6 +72,8 @@
     color: #000;
     margin: 0;
     letter-spacing: 5px;
+    margin-top: 46px;
+
 }
 
 /* ==================

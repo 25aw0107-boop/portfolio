@@ -4,13 +4,16 @@ export default function Header() {
 
     // 🌟 处理点击平滑滚动
     const handleNavClick = (e, targetId) => {
-        e.preventDefault(); // 阻止 a 标签默认的瞬移行为
+        e.preventDefault();
 
         if (window.lenis) {
-            // 使用 Lenis 滚动到目标位置
+            // 🌟 逻辑判断：如果是去 contact，偏移量设为 0；其他地方（如 works）保留 -60
+            const customOffset = targetId === "#contact" ? 0 : -60;
+
             window.lenis.scrollTo(targetId, {
-                offset: -60,   // 偏移量，防止标题贴顶太死
-                duration: 1.5, // 跳转时的滑动时间
+                offset: customOffset,
+                duration: 1.5,
+                easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // 建议加上平滑曲线
             });
         }
     };
