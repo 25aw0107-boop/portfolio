@@ -1,0 +1,169 @@
+/* PC 端样式保持你之前的逻辑 */
+.headerWrapper {
+    position: fixed;
+    top: 40px;
+    right: 5%;
+    display: flex;
+    gap: 30px;
+    z-index: 1000;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.navItem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    transition: color 0.4s ease;
+}
+
+.navItem:hover {
+    color: #b54434;
+}
+
+.line {
+    width: 1px;
+    /* 🌟 高度从 60px 缩短到 30px */
+    height: 30px;
+
+    /* 🌟 颜色从实色改为半透明淡灰色 */
+    background-color: rgba(0, 0, 0, 0.4);
+
+    margin-bottom: 12px;
+    transition: all 0.4s ease;
+    display: block;
+}
+
+.navItem:hover .line {
+    /* 🌟 Hover 时缩短到 15px，保持灵动感 */
+    height: 15px;
+    background-color: #b54434;
+    /* 或者是你选中的红褐色 */
+}
+
+.text {
+    writing-mode: vertical-rl;
+    font-family: "Hiragino Mincho ProN", serif;
+    font-size: 14px;
+    letter-spacing: 0.2em;
+    transition: transform 0.4s ease;
+}
+
+.navItem:hover .text {
+    transform: translateY(-5px);
+    /* 位移也减小一点，更优雅 */
+}
+
+/* --- 🌟 新增：汉堡按钮样式 (默认隐藏) --- */
+.menuBtn {
+    display: none;
+    /* PC端隐藏 */
+    position: fixed;
+    top: 30px;
+    right: 30px;
+    width: 30px;
+    height: 30px;
+    z-index: 1100;
+    flex-direction: column;
+    justify-content: center;
+    gap: 8px;
+    cursor: pointer;
+}
+
+.bar {
+    width: 100%;
+    height: 1px;
+    background-color: #333;
+    transition: all 0.3s ease;
+}
+
+/* --- SP端 汉堡按钮核心修复 --- */
+@media (max-width: 768px) {
+    .menuBtn {
+        display: flex;
+        position: fixed;
+        top: 30px;
+        right: 30px;
+        width: 32px;
+        height: 24px;
+        /* 给一个固定的点击区域高度 */
+        flex-direction: column;
+        justify-content: center;
+        /* 居中分布线段 */
+        align-items: center;
+        z-index: 2100;
+        cursor: pointer;
+    }
+
+    .bar {
+        position: absolute;
+        /* 使用绝对定位让两根线在旋转时中心重合 */
+        width: 100%;
+        height: 1px;
+        background-color: #333;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* 初始位置：第一根线稍微往上，第二根稍微往下 */
+    .bar:nth-child(1) {
+        transform: translateY(-5px);
+    }
+
+    .bar:nth-child(2) {
+        transform: translateY(5px);
+    }
+
+    /* 🌟 变成 X 的核心逻辑 */
+    .menuOpen .bar:nth-child(1) {
+        transform: translateY(0) rotate(45deg);
+        /* 回到中心并旋转 */
+        background-color: #333;
+    }
+
+    .menuOpen .bar:nth-child(2) {
+        transform: translateY(0) rotate(-45deg);
+        /* 回到中心并反向旋转 */
+        background-color: #333;
+    }
+
+    /* 全屏毛玻璃层 */
+    .headerWrapper {
+        position: fixed;
+        inset: 0;
+        /* 铺满全屏 */
+        width: 100vw;
+        height: 100vh;
+        background-color: rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(25px);
+
+        display: flex;
+        flex-direction: row;
+        /* 选项横向排列 */
+        justify-content: center;
+        align-items: center;
+        gap: 15%;
+        /* 竖排文字之间的呼吸感 */
+
+        opacity: 0;
+        visibility: hidden;
+        z-index: 2000;
+        transition: opacity 0.5s ease, visibility 0.5s ease;
+    }
+
+    .showNav {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    /* 隐藏文字旁边的线段（按你要求的关掉） */
+    .line {
+        display: none !important;
+    }
+
+    .text {
+        writing-mode: vertical-rl;
+        font-size: 20px;
+        letter-spacing: 0.5em;
+        color: #333;
+    }
+}

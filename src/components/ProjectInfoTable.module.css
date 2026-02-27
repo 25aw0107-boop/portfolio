@@ -1,0 +1,120 @@
+/* src/components/ProjectInfoTable.module.css */
+
+.infoSection {
+    width: 100%;
+    background-color: transparent;
+    /* 确保露出父级的淡蓝色 */
+    display: flex;
+    justify-content: center;
+    padding-bottom: 36px;
+}
+
+.tableContainer {
+    width: 100%;
+    max-width: 900px;
+    /* 限制宽度，防止长线在大屏幕上太散 */
+    padding: 0 40px;
+}
+
+.infoRow {
+    display: flex;
+    padding: 40px 0;
+    border-bottom: 1px solid #d1e3f1;
+    /* 🌟 核心修改：从 flex-start 改为 center */
+    align-items: center;
+}
+
+/* 第一行也要有顶部的线 */
+.infoRow:first-child {
+    border-top: 1px solid #d1e3f1;
+}
+
+.labelPane {
+    width: 200px;
+    /* 固定标签宽度 */
+    flex-shrink: 0;
+}
+
+.label {
+    font-size: 16px;
+    font-weight: 600;
+    color: #333333;
+    font-family: "Hiragino Mincho ProN", serif;
+    letter-spacing: 0.1em;
+    /* 🌟 确保行高与右侧文字匹配，或者设为 1 方便居中计算 */
+    line-height: 1;
+}
+
+.valuePane {
+    flex: 1;
+}
+
+.valueText {
+    font-size: 14px;
+    /* 🌟 这里的行高会决定文字占据的垂直空间 */
+    line-height: 1.8;
+    color: #727272;
+    margin-top: 0px;
+    text-align: justify;
+}
+
+.valueText:last-child {
+    margin-bottom: 0;
+}
+
+/* ... 原有桌面端代码保持不变 ... */
+
+/* 📱 移动端 (SP) 适配 */
+@media (max-width: 768px) {
+    .infoSection {
+        padding-bottom: 40px;
+        /* 适当增加底部留白 */
+    }
+
+    .tableContainer {
+        padding: 0 25px;
+        /* 手机端减小左右内边距，增加内容展示空间 */
+    }
+
+    .infoRow {
+        flex-direction: column;
+        /* 垂直排列 */
+        padding: 25px 0;
+        /* 缩小上下间距，防止页面拉得过长 */
+        align-items: flex-start;
+        /* 🌟 关键：手机端改为左对齐，不再居中 */
+    }
+
+    .labelPane {
+        width: 100%;
+        /* 宽度占满 */
+        margin-bottom: 12px;
+        /* 标签与内容之间的距离 */
+    }
+
+    .label {
+        font-size: 15px;
+        /* 稍微缩小标签字号 */
+        color: #48a8a8;
+        /* 增加对比度 */
+        position: relative;
+        display: inline-block;
+    }
+
+
+
+    .valuePane {
+        width: 100%;
+    }
+
+    .valueText {
+        font-size: 13.5px;
+        /* 手机端 13.5px - 14px 最适合阅读 */
+        line-height: 1.7;
+        /* 稍微收紧行高，增强紧凑感 */
+        color: #555;
+        /* 颜色比桌面端稍深，确保小字清晰 */
+        text-align: left;
+        /* 手机端建议左对齐，避开两端对齐产生的奇怪空格 */
+    }
+}

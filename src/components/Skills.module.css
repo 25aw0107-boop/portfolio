@@ -1,0 +1,393 @@
+/* ==================
+   整体容器与标题
+================== */
+.skillsSection {
+    position: relative;
+    width: 100%;
+    padding: 0 20px;
+    overflow: hidden;
+    /* 必须隐藏，防止两倍宽的波浪撑开页面 */
+    margin: auto;
+    margin-top: 40px;
+    margin-bottom: 160px;
+}
+
+.titleWrapper {
+    position: relative;
+    text-align: center;
+    z-index: 10;
+}
+
+.title {
+    font-size: 28px;
+    font-family: "Hiragino Mincho ProN", "Yu Mincho", "Noto Serif JP", serif;
+    letter-spacing: 4px;
+    color: #333;
+    margin-bottom: 64px;
+}
+
+/* ==================
+   动画舞台容器
+================== */
+.stage {
+    position: relative;
+    width: 100%;
+    height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 200px;
+}
+
+/* ==================
+   动态波浪核心逻辑
+================== */
+.waveLayer {
+    position: absolute;
+    bottom: 150px;
+    width: 100%;
+    height: 120px;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.foregroundWaves {
+    z-index: 3;
+    bottom: 15%;
+    opacity: 0.5;
+}
+
+.wave {
+    position: absolute;
+    width: 300%;
+    height: 100%;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 300' preserveAspectRatio='none'%3E%3Cpath d='M0,50 Q200,100 400,50 T800,50' fill='none' stroke='%23333333' stroke-width='1.5'/%3E%3C/svg%3E");
+    background-size: 12.5% 100%;
+    background-repeat: repeat-x;
+    will-change: transform;
+    /* 统一放在基类，子类只写名称和时长 */
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+/* 🌟 设置 30s-50s 的长循环时间 */
+.wave1 {
+    top: 0;
+    opacity: 0.5;
+    animation: flowLeft 35s linear infinite;
+}
+
+.wave2 {
+    top: 40px;
+    opacity: 0.3;
+    animation: flowRight 45s linear infinite;
+    transform: scaleY(1.2);
+}
+
+.wave3 {
+    top: 20px;
+    opacity: 0.6;
+    animation: flowLeft 30s linear infinite;
+}
+
+.wave4 {
+    top: 60px;
+    opacity: 0.4;
+    animation: flowRight 50s linear infinite;
+    transform: scaleY(0.8);
+}
+
+/* 🌟 精准位移：第一屏走完正好第二屏接上，实现无缝 */
+@keyframes flowLeft {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+@keyframes flowRight {
+    0% {
+        transform: translateX(-50%);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
+/* ==================
+   小船与技能主体
+================== */
+.boatAndSkills {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.boat {
+    position: absolute;
+    left: 50%;
+    bottom: 25%;
+    transform: translateX(-50%);
+    /* 使用这个代替 margin-left 更符合现代写法 */
+    width: 160px;
+    height: auto;
+    /* 🌟 核心同步：周期 7.5s (对应 wave3 的 30s)
+       增加 -1.5s 的 delay，通常能让船在加载时正好处于一个较好的平衡点 */
+    animation: boatRock 7.5s ease-in-out -1.5s infinite;
+}
+
+@keyframes boatRock {
+
+    0%,
+    100% {
+        transform: translateX(-50%) translateY(8px) rotate(-3deg);
+    }
+
+    50% {
+        transform: translateX(-50%) translateY(-12px) rotate(3deg);
+    }
+}
+
+.skillGroup {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    animation: floatBob 6s ease-in-out infinite;
+    font-family: "Hiragino Mincho ProN", "Yu Mincho", "Noto Serif JP", serif;
+    color: #333;
+}
+
+.groupCoding {
+    top: 40%;
+    left: calc(28vw - 119px);
+    transform: translateX(-50%);
+}
+
+.groupDesign {
+    top: 30%;
+    right: calc(30vw - 119px);
+    animation-delay: -2s;
+}
+
+.groupEditing {
+    bottom: -20%;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: floatBobCenter 6s ease-in-out infinite;
+    animation-delay: -4s;
+}
+
+@keyframes floatBob {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+@keyframes floatBobCenter {
+
+    0%,
+    100% {
+        transform: translate(-50%, 0);
+    }
+
+    50% {
+        transform: translate(-50%, -10px);
+    }
+}
+
+.mainSkill {
+    font-size: 32px;
+    font-weight: bold;
+    letter-spacing: 6px;
+    white-space: nowrap;
+}
+
+.subSkill {
+    position: absolute;
+    font-size: 16px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #555;
+    white-space: nowrap;
+}
+
+/* 子技能位置 */
+.pos1 {
+    top: -25px;
+    left: 30px;
+}
+
+.pos2 {
+    top: -25px;
+    right: 30px;
+}
+
+.pos3 {
+    bottom: -25px;
+    left: 0px;
+}
+
+.pos4 {
+    bottom: -25px;
+    right: 30px;
+}
+
+.pos5 {
+    top: -30px;
+    left: 20px;
+}
+
+.pos6 {
+    bottom: -25px;
+    left: -40px;
+}
+
+.pos7 {
+    bottom: -25px;
+    right: -30px;
+}
+
+.pos8 {
+    top: -25px;
+    left: -60px;
+}
+
+.pos9 {
+    top: -23px;
+    right: -60px;
+}
+
+.pos10 {
+    bottom: -20px;
+    left: 20px;
+}
+
+/* ==================
+   移动端响应式调整
+================== */
+/* ==========================================
+   移动端响应式调整 (@media (max-width: 768px))
+   ========================================== */
+@media (max-width: 768px) {
+    .skillsSection {
+        margin-top: 0px;
+        margin-bottom: 40px;
+        /* 稍微留出一点底部间距 */
+    }
+
+    .stage {
+        height: 280px;
+        /* 手机端稍微收缩高度 */
+    }
+
+    /* 🌟 小船：同步 wave3 (35s) 的频率 */
+    .boat {
+        bottom: 15%;
+        left: 50%;
+        width: 140px;
+        /* 稍微缩小，防止遮挡文字 */
+        margin-left: 0;
+        /* 清除 PC 端的 margin-left */
+        /* 核心同步：35s / 4 = 8.75s，-1.5s 为相位微调 */
+        animation: boatRockSP 8.75s ease-in-out -1.5s infinite;
+    }
+
+    /* 🌟 技能组位置优化 */
+    .groupCoding {
+        top: 40%;
+        left: 8%;
+        transform: none;
+    }
+
+    .groupDesign {
+        top: 30%;
+        right: 8%;
+        transform: none;
+    }
+
+    .groupEditing {
+        bottom: -15%;
+        left: 50%;
+        /* 确保居中与动画并存 */
+        animation: floatBobCenterSP 6s ease-in-out infinite;
+    }
+
+    /* 🌟 字体大小微调 */
+    .mainSkill {
+        font-size: 20px;
+        letter-spacing: 3px;
+    }
+
+    .subSkill {
+        font-size: 11px;
+    }
+
+    /* 🌟 波浪：更平缓的曲线与更长的周期 */
+    .wave {
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 200' preserveAspectRatio='none'%3E%3Cpath d='M0,50 Q200,65 400,50 T800,50' fill='none' stroke='%23333333' stroke-width='1'/%3E%3C/svg%3E");
+        background-size: 25% 100%;
+    }
+
+    .waveLayer {
+        bottom: 100px;
+    }
+
+    /* 重新定义波浪高度层次 */
+    .wave2 {
+        top: 10px;
+        animation-duration: 55s;
+    }
+
+    .wave1 {
+        top: 0px;
+        animation-duration: 40s;
+    }
+
+    .wave3 {
+        top: 35px;
+        animation-duration: 35s;
+    }
+
+    .wave4 {
+        top: 60px;
+        animation-duration: 65s;
+    }
+
+    /* 🌟 移动端专用动画：合并了位移与晃动 */
+    @keyframes boatRockSP {
+
+        0%,
+        100% {
+            transform: translateX(-50%) translateY(5px) rotate(-3deg);
+        }
+
+        50% {
+            transform: translateX(-50%) translateY(-10px) rotate(3deg);
+        }
+    }
+
+    @keyframes floatBobCenterSP {
+
+        0%,
+        100% {
+            transform: translateX(-50%) translateY(0);
+        }
+
+        50% {
+            transform: translateX(-50%) translateY(-8px);
+        }
+    }
+}

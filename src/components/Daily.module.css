@@ -1,0 +1,250 @@
+.dailySection {
+    position: relative;
+    width: 100%;
+    margin-top: 36px;
+}
+
+/* --- 头部布局：参考 About 并修正右侧导航重叠 --- */
+.dailyHeader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16%;
+    margin: 0 auto 46px auto;
+}
+
+.titleWrapper {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: fit-content;
+}
+
+.titleBg {
+    position: absolute;
+    top: 50%;
+    left: 0%;
+    transform: translate(-50%, -50%);
+    width: 460px;
+    /* 现在你随便改，哪怕 800px 都能生效了 */
+
+    /* 👇 核心魔法：解除全局图片的宽度限制 */
+    max-width: none;
+    z-index: -1;
+    opacity: 0.9;
+}
+
+.title {
+    font-size: 38px;
+    font-family: "Hiragino Mincho ProN", "Yu Mincho", "Noto Serif JP", serif;
+    color: #000;
+    margin: 0;
+    letter-spacing: 5px;
+}
+
+.dailyDescBox {
+    z-index: 2;
+}
+
+.tag {
+    color: #a0dbdf;
+    font-size: 14px;
+    font-weight: bold;
+    display: block;
+    margin-top: 55px;
+}
+
+.descText {
+    font-size: 14px;
+    color: #666;
+    line-height: 1.8;
+}
+
+/* --- 万能无缝轮播核心 --- */
+.carouselContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    /* 两排之间的间距 */
+    width: 100%;
+
+    /* 🌟 关键：必须加上这一行，防止内部长轨道撑开页面宽度 */
+    overflow: hidden;
+
+    /* 确保它不会因为定位问题产生偏移 */
+    position: relative;
+}
+
+.carouselRow {
+    width: 100%;
+    display: flex;
+}
+
+.carouselTrack {
+    display: flex;
+    width: max-content;
+    gap: 20px;
+    /* 🌟 核心：补齐末尾间距 */
+    padding-right: 20px;
+}
+
+.carouselItem {
+    width: 270px;
+    /* 恢复你最满意的 300px 大小 */
+    flex-shrink: 0;
+    /* 防止图片在排队时被挤扁 */
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.imgBox {
+    width: 100%;
+    height: 180px;
+    background-color: #f0f0f0;
+    /* 之后替换成真实 img */
+    border-radius: 4px;
+    /* 🌟 蓝绿色深阴影 */
+    box-shadow: 0 10px 25px rgba(74, 154, 156, 0.25);
+}
+
+.imgCaption {
+    font-size: 14px;
+    color: #999;
+}
+
+/* --- 动态无缝动画逻辑 --- */
+@keyframes scrollLeft {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-50%);
+    }
+
+    /* 🌟 核心：精准移动一半 */
+}
+
+@keyframes scrollRight {
+    0% {
+        transform: translateX(-50%);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
+.trackLeft {
+    animation: scrollLeft 160s linear infinite;
+    will-change: transform;
+}
+
+.trackRight {
+    animation: scrollRight 120s linear infinite;
+    will-change: transform;
+}
+
+
+
+/* =============================================
+   📱 移动端适配 (Smartphone)
+   ============================================= */
+@media (max-width: 768px) {
+    .dailySection {
+        margin-top: 60px;
+        /* 增加与上方模块的间距 */
+    }
+
+    /* 1. 头部布局转为垂直，并居中对齐 */
+    .dailyHeader {
+        flex-direction: column;
+        gap: 30px;
+        /* 标题与文字的间距 */
+        margin-bottom: 40px;
+        padding: 0 20px;
+        text-align: center;
+    }
+
+    /* 2. 标题与背景底纹缩小 */
+    .title {
+        font-size: 28px;
+        /* 稍微缩小标题 */
+        letter-spacing: 3px;
+        white-space: nowrap;
+    }
+
+    .titleBg {
+        width: 320px;
+        /* 手机端背景底纹不要超出屏幕 */
+        opacity: 0.8;
+    }
+
+    /* 3. 描述文字微调 */
+    .tag {
+        margin-top: 0;
+        /* 取消 PC 端的顶部偏移 */
+        font-size: 13px;
+        margin-bottom: 8px;
+    }
+
+    .descText {
+        font-size: 13px;
+        line-height: 1.6;
+
+        br {
+            display: none;
+            /* 在手机上让文字自然流出，不强制换行 */
+        }
+    }
+
+    /* 4. 轮播卡片尺寸调整 */
+    .carouselContainer {
+        gap: 12px;
+        /* 两排之间的间距缩小 */
+    }
+
+    .carouselItem {
+        width: 180px;
+        /* 手机端卡片变窄 */
+        gap: 8px;
+    }
+
+    .imgBox {
+        height: 120px;
+        /* 手机端高度降低 */
+        box-shadow: 0 6px 15px rgba(74, 154, 156, 0.2);
+        /* 阴影变轻 */
+    }
+
+    .imgCaption {
+        font-size: 12px;
+    }
+
+    /* 5. 动画提速 */
+    /* 因为卡片变窄了，同样的动画时间会显得滚得极慢，手机端可以稍微快一点点 */
+    .trackLeft {
+        animation-duration: 100s;
+    }
+
+    .trackRight {
+        animation-duration: 100s;
+    }
+}
+
+/* 针对极窄屏幕（如 iPhone SE）进一步微调 */
+@media (max-width: 375px) {
+    .titleBg {
+        width: 280px;
+    }
+
+    .carouselItem {
+        width: 150px;
+    }
+
+    .imgBox {
+        height: 100px;
+    }
+}

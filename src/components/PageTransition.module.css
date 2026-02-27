@@ -1,0 +1,24 @@
+.whiteOverlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(255, 255, 255, 1);
+    z-index: 9999;
+    /* 确保它在所有组件之上 */
+
+    /* 这里的参数你可以统一调整 */
+    animation: reveal 1.5s ease-in-out forwards;
+
+    will-change: opacity;
+    pointer-events: none;
+}
+
+@keyframes reveal {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+        visibility: hidden;
+    }
+}

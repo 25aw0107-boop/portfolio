@@ -1,0 +1,189 @@
+.hero {
+    position: relative;
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+    background: #f6fbff;
+}
+
+/* 两侧水墨 */
+.inkBgLeft,
+.inkBgRight {
+    position: absolute;
+    z-index: 1;
+    pointer-events: none;
+    width: 90vw;
+    max-width: 1080px;
+    opacity: 1;
+}
+
+.inkBgLeft {
+    bottom: 10vh;
+    right: calc(50vw + 80px);
+}
+
+.inkBgRight {
+    top: -15vh;
+    left: calc(50vw + 80px);
+    transform: rotate(160deg);
+}
+
+.inkImg {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
+/* =========================================
+   🌟 核心修复：左侧装饰文字（确保竖排）
+========================================= */
+.leftDecor {
+    position: absolute;
+    left: calc(25vw - 119px);
+    transform: translateX(-50%);
+    top: 22vh;
+    z-index: 5;
+    display: flex;
+    flex-direction: row-reverse;
+    /* 让两列文字并排，但文字内部竖排 */
+    gap: 15px;
+    color: #ffffff;
+    font-family: "Hiragino Mincho ProN", "Yu Mincho", "Noto Serif JP", serif;
+    text-shadow: 0 2px 15px rgb(6, 76, 110);
+    user-select: none;
+}
+
+/* 第一列文字：ポートフォリオ */
+.decorCol {
+    writing-mode: vertical-rl;
+    /* 强制竖排 */
+    text-orientation: mixed;
+    font-size: 26px;
+    letter-spacing: 0.4em;
+    opacity: 0.9;
+}
+
+/* 第二列文字：僕の */
+.decorColSub {
+    writing-mode: vertical-rl;
+    /* 强制竖排 */
+    text-orientation: mixed;
+    font-size: 30px;
+    letter-spacing: 0.3em;
+    margin-top: 45px;
+    /* 错落感 */
+    opacity: 0.8;
+}
+
+/* 响应式：窄屏隐藏 */
+@media (max-width: 850px) {
+    .leftDecor {
+        display: none;
+    }
+}
+
+/* --- 中间挂轴部分保持之前的物理属性 --- */
+.stage {
+    position: relative;
+    width: min(476px, 100vw);
+    min-height: 100vh;
+    background-color: #f6fbff;
+    box-shadow: 0 -12px 40px rgba(0, 0, 0, 0.08);
+    z-index: 10;
+}
+
+.heroBg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+}
+
+.bgSky,
+.bgMount {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+}
+
+.bgSky {
+    top: 0;
+    height: auto;
+}
+
+.bgMount {
+    bottom: 0;
+    height: auto;
+}
+
+@media (max-width: 768px) {
+    .bgMount {
+        width: 180%;
+    }
+}
+
+.heroInner {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: clamp(40px, 5vh, 60px);
+    padding: 60px 16px;
+    transform: translateY(-8%);
+}
+
+.seal {
+    width: 86px;
+    height: 86px;
+}
+
+.sealImg {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.vTitle {
+    margin: 0;
+    writing-mode: vertical-rl;
+    font-family: "Hiragino Mincho ProN", serif;
+    font-size: clamp(24px, 4.5vw, 34px);
+    line-height: 1.5;
+    letter-spacing: 0.16em;
+    color: rgba(20, 35, 50, 0.84);
+}
+
+.accent {
+    color: rgba(180, 34, 34, 0.95);
+    font-weight: 700;
+}
+
+.col {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: colRise 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+.col:nth-of-type(1) {
+    animation-delay: 0.3s;
+}
+
+.col:nth-of-type(2) {
+    animation-delay: 0.6s;
+}
+
+.col:nth-of-type(3) {
+    animation-delay: 0.9s;
+}
+
+@keyframes colRise {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

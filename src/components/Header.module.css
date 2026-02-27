@@ -1,0 +1,65 @@
+.topbar {
+    position: fixed;
+    top: 60px;
+    left: calc(55vw + 258px);
+    z-index: 20;
+}
+
+.nav {
+    display: flex;
+    gap: 25px;
+    /* 稍微增加间距，给竖线留出视觉空间 */
+    flex-direction: row-reverse;
+}
+
+.navItem {
+    position: relative;
+    /* 必须加，作为竖线的定位基点 */
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    text-decoration: none;
+    color: rgba(20, 35, 50, 0.85);
+    font-family: "Shippori Mincho", serif;
+    font-size: 16px;
+    letter-spacing: 0.3em;
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    /* 更有弹性的过渡 */
+    cursor: pointer;
+    padding-top: 15px;
+    /* 给上方竖线留出预备空间 */
+}
+
+/* 🌟 新增：上方竖线初始状态 */
+.navItem::before {
+    content: "";
+    position: absolute;
+    top: -30px;
+    /* 初始在更上方 */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 1px;
+    /* 线条粗细 */
+    height: 0;
+    /* 初始高度为0 */
+    background-color: #b54434;
+    /* 与红印章呼应的红色 */
+    transition: all 0.4s ease;
+    opacity: 0;
+}
+
+/* 🌟 Hover 状态美化 */
+.navItem:hover {
+    color: #b54434;
+    /* 1. 文字向下微动 */
+    transform: translateY(15px);
+}
+
+/* 🌟 Hover 时竖线的生长动画 */
+.navItem:hover::before {
+    height: 35px;
+    /* 竖线向下伸长的长度 */
+    top: -25px;
+    /* 调整竖线位置，使其贴近文字上方 */
+    opacity: 1;
+    /* 这里的动画会产生一种从上往下“刺”出来或者“垂”下来的感觉 */
+}

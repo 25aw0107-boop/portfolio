@@ -1,0 +1,173 @@
+/* src/components/ProjectReflection.module.css */
+
+.reflectionSection {
+    width: 100%;
+    padding-top: 106px;
+    display: flex;
+    justify-content: center;
+
+}
+
+.container {
+    width: 100%;
+    max-width: 900px;
+    padding: 0 40px;
+
+}
+
+.reflectionBlock {
+    margin-bottom: 116px;
+}
+
+/* 🌟 新增标题容器：用于定位水墨 */
+.titleWrapper {
+    position: relative;
+    display: inline-block;
+}
+
+/* 🌟 核心：标题背景装饰图 */
+.titleDecor {
+    position: absolute;
+    top: -120px;
+    /* 向上偏移，包住文字 */
+    left: -120px;
+    /* 向左偏移，营造不规则感 */
+    width: 340px;
+    /* 根据图片比例和文字长度调整 */
+    height: auto;
+    opacity: 1;
+    /* 保持半透明，更自然 */
+    z-index: -1;
+    /* 放在文字下面 */
+    pointer-events: none;
+    /* 确保不影响文字选中 */
+    /* 🌟 关键：防止图片被继承的样式限制住 */
+    max-width: none !important;
+    object-fit: contain;
+    /* 确保图片比例不变 */
+}
+
+.title {
+    position: relative;
+    z-index: 2;
+    /* 文字压在图片上 */
+    font-size: 28px;
+    color: #333;
+    font-family: "Hiragino Mincho ProN", serif;
+    letter-spacing: 0.1em;
+    margin-left: 48px;
+    margin-bottom: 46px;
+}
+
+/* 🌟 去掉你之前不想要的短短下划线 */
+.title::after {
+    display: none;
+}
+
+.content {
+    font-size: 16px;
+    line-height: 2.4;
+    /* 稍微再调宽一点，更有呼吸感 */
+    color: #444;
+    /* 文字加深一点点，提高可读性 */
+    text-align: justify;
+    letter-spacing: 0.05em;
+    max-width: 800px;
+    margin: 24px 0;
+}
+
+/* src/components/ProjectReflection.module.css */
+
+.reflectionSection {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    padding-top: 106px;
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+    /* 必须保留，防止大图溢出 */
+}
+
+/* 共有基础样式 */
+.inkTopRight,
+.inkBottomLeft {
+    position: absolute;
+    z-index: -20;
+    pointer-events: none;
+    max-width: none !important;
+    /* 🌟 关键：从页面中心开始定位 */
+    left: 50%;
+}
+
+/* 🌟 右上角固定：以中心线为准向右推 */
+.inkTopRight {
+    width: 1360px;
+    top: -200px;
+    /* 假设文字容器宽 900px，一半就是 450px。
+       我们把图片中心往右挪，这样它就永远在文字右侧固定距离 */
+    margin-left: 100px;
+    transform: rotate(-15deg);
+}
+
+/* 🌟 左下角固定：以中心线为准向左推 */
+.inkBottomLeft {
+    width: 1160px;
+    bottom: -150px;
+    /* 负值表示向左推 */
+    opacity: 0.8;
+    margin-left: -1200px;
+    transform: scaleX(-1) rotate(10deg);
+}
+
+/* --- 📱 移动端 (SP) 适配 --- */
+@media (max-width: 768px) {
+    .reflectionSection {
+        /* 减小顶部留白，手机端用户习惯更早看到内容 */
+        padding-top: 60px;
+    }
+
+    .container {
+        /* 增加两侧留白，防止文字贴边 */
+        padding: 0 30px;
+    }
+
+    .reflectionBlock {
+        /* 减小块与块之间的距离 */
+        margin-bottom: 80px;
+    }
+
+    /* 🌟 核心：重新调整手机端的水墨位置和大小 */
+    .titleDecor {
+        width: 180px;
+        /* 手机端缩小水墨图片 */
+        top: -55px;
+        /* 相应调整偏移量 */
+        left: -60px;
+        /* 相应调整偏移量 */
+        opacity: 0.8;
+        /* 手机端背景稍淡一点，增加文字清晰度 */
+    }
+
+    .title {
+        font-size: 20px;
+        /* 减小标题字号 */
+        margin-left: 20px;
+        /* 减小缩进，释放给正文更多空间 */
+        margin-bottom: 24px;
+    }
+
+    .content {
+        font-size: 14px;
+        /* 手机端文字稍小 */
+        line-height: 2.1;
+        /* 稍微收窄行高，保持阅读连贯性 */
+        color: #555;
+        max-width: 100%;
+        /* 确保占满容器 */
+        letter-spacing: 0.03em;
+        /* 在极小屏幕下，text-align: justify 可能会导致词间距过大，
+           如果发现排版奇怪，可以改为 left */
+        text-align: justify;
+    }
+}

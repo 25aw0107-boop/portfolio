@@ -1,0 +1,144 @@
+/* src/components/ProjectGallery.module.css */
+
+.gallerySection {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* 🌟 半透明蓝绿色背景条 */
+.bgStrip {
+    width: 100%;
+    background-color: rgba(210, 233, 231, 0.5);
+    /* 蓝绿色半透明 */
+    padding: 60px 0;
+    display: flex;
+    justify-content: center;
+}
+
+.imageContainer {
+    display: flex;
+    gap: 1%;
+    width: 100%;
+    max-width: 80%;
+    height: 400px;
+    /* 根据你的图片比例调整 */
+    align-items: center;
+}
+
+.imgWrapper {
+    flex: 1;
+    /* 初始所有图片平分宽度 */
+    height: 90%;
+    overflow: hidden;
+    transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+    /* 丝滑过渡 */
+    cursor: pointer;
+    border-radius: 4px;
+    /* 🌟 初始状态：给一个非常淡的投影，或者不给 */
+    box-shadow: 0 4px 45px rgba(2, 5, 5, 0.15);
+}
+
+.imgWrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* 保证图片不缩放变形 */
+    transition: transform 0.5s ease;
+}
+
+/* 🌟 核心：Hover 效果 */
+.imageContainer:hover .imgWrapper {
+    flex: 0.9;
+    /* 当容器被 hover 时，所有图片先变小一点 */
+    filter: brightness(0.73);
+}
+
+.imageContainer .imgWrapper:hover {
+    flex: 1.2;
+    filter: brightness(1);
+    /* 被选中的变亮 */
+
+    /* 🌟 添加蓝绿色投影：使用了多层投影让光晕更自然柔和 */
+    box-shadow: 0 10px 30px rgba(160, 219, 223, 0.6),
+        0 0 15px rgba(0, 0, 0, 0.3);
+
+    /* 稍微把被选中的图往上提一点，配合投影更有立体感 */
+    transform: translateY(-5px);
+    z-index: 2;
+    /* 确保投影不会被旁边的图片遮挡 */
+}
+
+.imageContainer .imgWrapper:hover img {
+    transform: scale(1.05);
+    /* 建议稍微加一点点放大，效果更生动 */
+}
+
+/* ... 原有桌面端代码保持不变 ... */
+
+/* 📱 移动端 (SP) 适配 */
+@media (max-width: 768px) {
+    .bgStrip {
+        padding: 40px 0;
+        /* 减小上下边距 */
+    }
+
+    .imageContainer {
+        display: flex;
+        /* 🌟 核心：开启横向滚动 */
+        overflow-x: auto;
+        overflow-y: hidden;
+        gap: 15px;
+        /* 图片之间的间距固定 */
+        max-width: 80%;
+        /* 撑满屏幕宽度 */
+        padding: 0 20px;
+        /* 两侧留白，让第一张和最后一张不贴边 */
+        height: 320px;
+        /* 适当降低高度，适合手机比例 */
+
+        /* 隐藏滚动条（可选，保持界面整洁） */
+        scrollbar-width: none;
+        /* Firefox */
+        -ms-overflow-style: none;
+        /* IE/Edge */
+    }
+
+    /* 针对 Webkit 浏览器隐藏滚动条 */
+    .imageContainer::-webkit-scrollbar {
+        display: none;
+    }
+
+    .imgWrapper {
+        flex: 0 0 75%;
+        /* 🌟 核心：每张图占据屏幕 75% 的宽度，露出下一张的一角 */
+        height: 100%;
+        border-radius: 8px;
+        /* 手机端圆角可以稍微大一点，更显圆润 */
+
+        /* 🌟 默认带上一点蓝绿色投影，增强氛围 */
+        box-shadow: 0 8px 20px rgba(160, 219, 223, 0.4);
+
+        /* 取消桌面端的 transform 和 transition 干扰 */
+        transform: none !important;
+        transition: transform 0.3s ease;
+    }
+
+    /* 取消手机端的 brightness 变暗效果，保持清晰 */
+    .imageContainer:hover .imgWrapper {
+        filter: none !important;
+        flex: 0 0 75% !important;
+    }
+
+    .imgWrapper img {
+        transform: none !important;
+        /* 手机端通常不需要内部缩放 */
+    }
+
+    /* 🌟 可选：给当前正在看的图片一点反馈（CSS 无法精准探测滚动位置，但可以保留点击反馈） */
+    .imgWrapper:active {
+        transform: scale(0.98) !important;
+        /* 点击时轻微下沉感 */
+    }
+}

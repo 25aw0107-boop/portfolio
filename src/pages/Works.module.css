@@ -1,0 +1,501 @@
+/* Works.module.css */
+
+.worksPage {
+    padding-top: 140px;
+    min-height: 100vh;
+    position: relative;
+    /* 🌟 注意：确保这里没有溢出隐藏，否则 sticky 会失效，但改为 fixed 后不影响 */
+}
+
+/* 右侧背景水墨装饰 - 优化稳定版 */
+.inkBgRight {
+    position: fixed;
+    /* 🌟 核心修改：以屏幕中轴线为基准 */
+    left: 50%;
+    /* 🌟 根据你的设计需求向右推。
+       假设容器宽 1200px，一半是 600px。
+       如果你想让它出现在容器右侧边缘附近，设置一个正值的 margin-left */
+    margin-left: 0px;
+
+    top: -500px;
+    width: 1500px;
+    opacity: 0.8;
+    z-index: -1;
+    pointer-events: none !important;
+    transform: rotate(-10deg);
+    transition: opacity 0.5s ease;
+
+    /* 防止在某些浏览器下图片被拉伸 */
+    max-width: none !important;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    padding: 0 5%;
+    position: relative;
+    z-index: 2;
+    /* 确保在背景图之上 */
+}
+
+/* --- 🌟 彻底修改：使用 fixed 实现真正的固定 --- */
+.sideArea {
+    width: 200px;
+    position: fixed;
+    top: 140px;
+    z-index: 999;
+    /* 🌟 极高层级，确保它在最前面 */
+    /* 如果你在外层禁用了点击，这里一定要开启 */
+    pointer-events: auto !important;
+}
+
+/* --- 🌟 关键：右侧列表需要空出左侧的宽度 --- */
+.worksGrid {
+    flex: 1;
+    margin-left: 200px;
+    /* 🌟 200px(边栏宽) + 100px(原有的gap) */
+    display: flex;
+    flex-direction: column;
+    gap: 120px;
+    padding-bottom: 24px;
+}
+
+.titleGroup {
+    position: relative;
+    margin-bottom: 60px;
+}
+
+.mainTitle {
+    font-size: 32px;
+    font-family: "Hiragino Mincho ProN", serif;
+    letter-spacing: 0.3em;
+    position: relative;
+    z-index: 2;
+    color: #333;
+}
+
+.inkTitle {
+    position: absolute;
+    width: 300px;
+    top: -128px;
+    left: -160px;
+    z-index: 1;
+    opacity: 0.8;
+    /* 🌟 关键：防止图片被继承的样式限制住 */
+    max-width: none !important;
+    object-fit: contain;
+    /* 确保图片比例不变 */
+    pointer-events: none !important;
+    /* 🌟 强制鼠标穿透，不拦截任何点击 */
+}
+
+/* --- 分类导航按钮交互 --- */
+.filterNav {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.filterNav button {
+    background: none;
+    border: none;
+    text-align: left;
+    font-size: 15px;
+    color: #999;
+    cursor: pointer;
+    padding: 10px 0;
+    /* 🌟 稍微加大 padding，让点击区域更广 */
+    font-family: "Shippori Mincho", serif;
+    position: relative;
+    transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    display: flex;
+    align-items: center;
+    /* 确保按钮本身可以接收点击 */
+    pointer-events: auto;
+    z-index: 1000;
+}
+
+/* 红色横线动画 */
+.filterNav button::before {
+    content: "";
+    position: absolute;
+    left: -45px;
+    width: 35px;
+    height: 1px;
+    background-color: #b54434;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.filterNav button:hover {
+    color: #b54434;
+    transform: translateX(15px);
+}
+
+.filterNav button:hover::before {
+    transform: scaleX(1);
+}
+
+.filterNav button.active {
+    color: #333;
+    font-weight: 700;
+    transform: translateX(15px);
+}
+
+.filterNav button.active::before {
+    transform: scaleX(1);
+    background-color: #333;
+}
+
+.dash {
+    display: none;
+}
+
+/* --- 作品流列表 (保持之前的优秀交互) --- */
+.workCard {
+    display: flex;
+    gap: 45px;
+    text-decoration: none;
+    color: inherit;
+    align-items: center;
+}
+
+.imageBox {
+    flex: 0 0 480px;
+    height: 320px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.05);
+    background-color: #000;
+}
+
+.imageBox img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1), filter 0.6s ease;
+}
+
+.hoverOverlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.1s ease-out;
+    z-index: 5;
+    backface-visibility: hidden;
+    transform: translateZ(0);
+}
+
+.hoverOverlay span {
+    color: #fff;
+    padding: 10px 28px;
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    border-radius: 50px;
+    font-size: 12px;
+
+    /* 胶囊形状的模糊效果，不知道为什么在线上没有用，只在本地有用 */
+    /* letter-spacing: 0.2em;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px); */
+}
+
+.workCard:hover .imageBox img {
+    transform: scale(1.05);
+    filter: brightness(0.8);
+}
+
+.workCard:hover .hoverOverlay {
+    opacity: 1;
+}
+
+.infoBox {
+    flex: 1;
+}
+
+.tag {
+    color: #a0dbdf;
+    font-size: 14px;
+    margin-bottom: 8px;
+    display: block;
+}
+
+.workTitle {
+    font-size: 26px;
+    font-family: "Shippori Mincho", serif;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #f0f0f0;
+    padding-bottom: 15px;
+}
+
+.workDesc {
+    font-size: 14px;
+    line-height: 2;
+    color: #666;
+    margin-bottom: 25px;
+}
+
+.moreBtn {
+    display: inline-block;
+    position: relative;
+    margin-top: 10px;
+}
+
+.moreBtn span {
+    font-size: 13px;
+    color: #999;
+    transition: color 0.4s ease;
+}
+
+.line {
+    height: 1px;
+    background: #333;
+    width: 0;
+    margin-top: 6px;
+    transition: width 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.workCard:hover .moreBtn .line {
+    width: 100%;
+}
+
+.workCard:hover .moreBtn span {
+    color: #333;
+}
+
+/* 🌟 提示文字的外部容器：确保它占满剩余空间并居中 */
+.emptyContainer {
+    grid-column: 1 / -1;
+    /* 如果你用了 grid 布局，让它横跨所有列 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 400px;
+    /* 给一个足够的高度，让文字看起来是在页面中央 */
+    width: 100%;
+}
+
+/* 🌟 提示文字本身 */
+.emptyMessage {
+    color: #a0a0a0;
+    /* 淡淡的灰色，不抢眼 */
+    font-size: 13px;
+    /* 缩小字号，显得更精致 */
+    line-height: 2.2;
+    /* 增加行高，让两行字之间有呼吸感 */
+    letter-spacing: 0.12em;
+    /* 增加字间距，符合日系审美 */
+    text-align: center;
+    /* 文字内容居中 */
+    font-family: "Hiragino Mincho ProN", serif;
+    /* 保持明朝体 */
+
+    /* 选配：让它淡入显示，切换分类时更丝滑 */
+    animation: fadeInMessage 1s ease forwards;
+}
+
+@keyframes fadeInMessage {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 5. 底部间距与占位文字样式 */
+.footerSpacing {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.placeholderText {
+    text-align: center;
+    color: #cbd5e1;
+    /* 淡淡的灰色 */
+    font-family: "Hiragino Mincho ProN", serif;
+    letter-spacing: 0.2em;
+    font-size: 14px;
+    margin: 0;
+}
+
+/* --- 移动端专项适配 (768px 以下) --- */
+@media (max-width: 768px) {
+
+    /* 1. 隐藏 Header - 假设 Header 渲染在 worksPage 内部或可以通过选择器触达 */
+    :global(.header_container_selector) {
+        display: none !important;
+    }
+
+    .worksPage {
+        padding-top: 40px;
+    }
+
+    .container {
+        flex-direction: column;
+        gap: 40px;
+        padding: 0 20px;
+    }
+
+    /* 2. 侧边栏改为顶部固定 --- 仅在此处修改定位逻辑，其余属性保持你原始状态 */
+    .sideArea {
+        position: fixed;
+        /* 修改：由 relative 改为 fixed */
+        top: 0;
+        /* 修改：固定在顶部 */
+        left: 0;
+        /* 修改：左对齐 */
+        width: 100%;
+        /* 修改：撑满宽度 */
+        background: #f6fbff;
+        /* 修改：添加背景，否则滚动时内容会重叠 */
+        padding-top: 20px;
+        /* 修改：微调间距 */
+        z-index: 1000;
+        /* 修改：确保层级最高 */
+        margin-bottom: 20px;
+    }
+
+    .titleGroup {
+        margin-bottom: 30px;
+        text-align: center;
+    }
+
+    .mainTitle {
+        font-size: 24px;
+        letter-spacing: 0.2em;
+    }
+
+    .inkTitle {
+        width: 200px;
+        top: -80px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    /* 3. 分类导航：保持你原始的所有样式 */
+    .filterNav {
+        display: flex;
+        flex-direction: row;
+        gap: 15px;
+        justify-content: center;
+        flex-wrap: nowrap !important;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        width: 100%;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 15px;
+        scrollbar-width: none;
+    }
+
+    .filterNav::-webkit-scrollbar {
+        display: none;
+    }
+
+    .filterNav button {
+        font-size: 13px;
+        padding: 5px 10px;
+        white-space: nowrap !important;
+        flex-shrink: 0;
+        background: none;
+        border: none;
+        text-align: left;
+        color: #999;
+        cursor: pointer;
+        font-family: "Shippori Mincho", serif;
+        position: relative;
+        transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+        display: flex;
+        align-items: center;
+        pointer-events: auto;
+    }
+
+    .filterNav button:hover,
+    .filterNav button.active {
+        transform: none;
+        color: #b54434;
+    }
+
+    .filterNav button::before {
+        display: none;
+    }
+
+    /* 4. 作品卡片：保持你原始的所有样式 */
+    .worksGrid {
+        margin-left: 0;
+        margin-top: 140px;
+        /* 唯一新增：因为 sideArea 固定后不占位，需手动顶开上方空间 */
+        gap: 60px;
+    }
+
+    .workCard {
+        flex-direction: column;
+        gap: 20px;
+
+    }
+
+
+    .imageBox {
+        width: 100%;
+        height: 220px;
+        flex: none;
+        overflow: hidden;
+        position: relative;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.05);
+        background-color: #000;
+    }
+
+    .hoverOverlay {
+        display: none;
+    }
+
+    .infoBox {
+        width: 96%;
+        text-align: left;
+        /* 强制左对齐 */
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        /* 确保 Flex 子元素（如 tag 和 moreBtn）也靠左 */
+    }
+
+    .workTitle {
+        font-size: 20px;
+        padding-bottom: 10px;
+        margin: 5px 0;
+    }
+
+    .workDesc {
+        font-size: 13px;
+        line-height: 1.8;
+        margin: 0;
+    }
+
+    .inkBgRight {
+        /* 手机端从中轴线往回撤一点，或者缩小宽度 */
+        margin-left: -100px;
+        width: 600px;
+        opacity: 0.4;
+    }
+
+    .emptyContainer {
+        min-height: 300px;
+    }
+
+    .emptyMessage {
+        font-size: 12px;
+        color: #b0b0b0;
+    }
+}

@@ -1,0 +1,79 @@
+/* =========================
+   全局重置（推荐保留）
+   ========================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700&display=swap');
+
+/* 强制所有元素以 border-box 计算，防止 padding 撑开宽度 */
+* {
+  box-sizing: border-box;
+}
+
+/* 解决切换视口时的偏移 */
+html {
+  scrollbar-gutter: stable;
+  /* 针对 Webkit 内核（Chrome/Edge）的滚动条优化 */
+}
+
+/* 确保最外层不会产生原生滚动条 */
+html.lenis {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+/* 🌟 最关键的一步：强制隐藏系统默认滚动条（如果 Lenis 已经生效） */
+body {
+  overflow-y: scroll;
+  /* 保持占用空间防止抖动 */
+}
+
+/* 针对不同浏览器隐藏原生条 */
+::-webkit-scrollbar {
+  width: 0;
+  background: transparent;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  /* 统一盒模型 */
+}
+
+html,
+body {
+  margin: 0;
+  /* 去默认边距 */
+  padding: 0;
+}
+
+body {
+  font-family:
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+  /* 默认字体 */
+  background: #f6fbff;
+  /* 改成你的页面底色 */
+  color: #1a2a36;
+  /* 默认文字色 */
+}
+
+/* 图片默认行为 */
+img {
+  max-width: 100%;
+  display: block;
+}

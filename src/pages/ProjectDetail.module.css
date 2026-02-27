@@ -1,0 +1,25 @@
+/* 5. 底部间距与占位文字样式 */
+.footerSpacing {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.placeholderText {
+    text-align: center;
+    color: #cbd5e1;
+    /* 淡淡的灰色 */
+    font-family: "Hiragino Mincho ProN", serif;
+    letter-spacing: 0.2em;
+    font-size: 14px;
+}
+
+/* 6. 异常状态处理 */
+.notFound {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-family: "Hiragino Mincho ProN", serif;
+    color: #666;
+}

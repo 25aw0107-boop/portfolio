@@ -1,0 +1,197 @@
+.heroSection {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    min-height: 600px;
+    background-color: transparent;
+    overflow: hidden;
+}
+
+/* 左半边：包含 Logo 和文字 */
+.leftPane {
+    flex: 1;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* 让文字垂直居中 */
+}
+
+/* Logo 必须在左上角 */
+.logoLink {
+    /* 🌟 核心修改：改为固定定位 */
+    position: fixed;
+
+    /* 保持原有的位置参数 */
+    top: 50px;
+    left: 80px;
+    width: 80px;
+    height: 80px;
+
+    /* 🌟 提高层级：确保它在所有滚动内容（包括水墨和图片）之上 */
+    z-index: 1001;
+
+    /* 增加平滑过渡，如果你希望在某些交互下改变 Logo 状态 */
+    transition: all 0.3s ease;
+}
+
+.logoImg {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* 文字排版完全对应图 1 */
+.textContainer {
+    position: relative;
+    z-index: 5;
+    max-width: 480px;
+    margin-left: 30%;
+}
+
+.tag {
+    display: block;
+    font-size: 16px;
+    color: #a0dbdf;
+    margin-bottom: 10px;
+    letter-spacing: 0.1em;
+}
+
+.title {
+    font-size: clamp(24px, 3.5vw, 42px);
+    color: #333;
+    font-family: "Hiragino Mincho ProN", "Yu Mincho", serif;
+    margin: 0 0 15px 0;
+    line-height: 1.2;
+}
+
+.divider {
+    width: 100%;
+    height: 1px;
+    background-color: #333;
+    margin-bottom: 20px;
+}
+
+.desc {
+    font-size: 14px;
+    line-height: 1.8;
+    color: #666;
+    margin-bottom: 10px;
+    max-width: 400px;
+}
+
+.role {
+    font-size: 13px;
+    color: #bbb;
+}
+
+/* 水墨位置微调，像图 1 一样淡淡地在文字后方 */
+.inkDecor {
+    position: absolute;
+    top: 35%;
+    left: 55%;
+    transform: translate(-50%, -50%);
+    width: 150vh;
+    /* 或者使用巨大的百分比 */
+    /* width: 200%; */
+
+    /* 🌟 关键：防止图片被继承的样式限制住 */
+    max-width: none !important;
+    z-index: -1;
+    pointer-events: none;
+    object-fit: contain;
+    /* 确保图片比例不变 */
+}
+
+/* 右半边：图片 */
+.rightPane {
+    flex: 1;
+    height: 100%;
+    margin-right: 5%;
+}
+
+.mainImg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* 图 1 中图片左侧有明显的淡蓝色分割线感，可以加上 */
+    border-left: 1px solid #f0f0f0;
+}
+
+/* 侧边留白 */
+.sideGutter {
+    width: 120px;
+    flex-shrink: 0;
+    /* 🌟 修改点 2：将这里的 #fff 删掉或改为 transparent */
+    background-color: transparent;
+}
+
+/* ... 原有代码保持不变 ... */
+
+/* 📱 移动端 (SP) 适配 */
+@media (max-width: 768px) {
+    .heroSection {
+        flex-direction: column;
+        /* 垂直排列：图上文下 */
+        height: auto;
+        /* 高度随内容自适应 */
+        min-height: unset;
+        overflow: visible;
+        /* 允许内容垂直延伸 */
+    }
+
+    /* 🌟 隐藏不需要的元素 */
+    .logoLink,
+    .inkDecor,
+    .sideGutter {
+        display: none !important;
+    }
+
+    /* 右半边：图片移到上方 */
+    .rightPane {
+        order: 1;
+        /* 强制图片排在第一位 */
+        width: 100%;
+        height: 300px;
+        /* 手机端固定图片高度，可根据需求调整 */
+        margin-right: 0;
+        /* 取消右侧留白 */
+    }
+
+    .mainImg {
+        border-left: none;
+        /* 取消左侧分割线 */
+        border-bottom: 1px solid #f0f0f0;
+        /* 改为底部线条 */
+    }
+
+    /* 左半边：内容移到下方 */
+    .leftPane {
+        order: 2;
+        /* 强制内容排在第二位 */
+        width: 100%;
+        padding: 40px 20px;
+        /* 给内容四周留出呼吸空间 */
+        justify-content: flex-start;
+    }
+
+    .textContainer {
+        margin-left: 0;
+        /* 取消桌面端的 30% 偏移 */
+        max-width: 100%;
+        /* 文字宽度撑满屏幕 */
+    }
+
+    /* 微调标题大小以适应手机屏幕 */
+    .title {
+        font-size: 24px;
+        /* clamp 也会生效，但这里可以给一个确定的安全值 */
+        margin-top: 5px;
+    }
+
+    .desc {
+        max-width: 100%;
+        font-size: 13px;
+        /* 手机端文字稍微缩小一点点更精致 */
+    }
+}

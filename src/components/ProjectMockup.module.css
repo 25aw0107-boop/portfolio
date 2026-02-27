@@ -1,0 +1,252 @@
+.mockupSection {
+    width: 100%;
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 10%;
+    /* 稍微缩小边距，给内容更多空间 */
+    position: relative;
+    background-color: transparent;
+    overflow: hidden;
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    max-width: 1200px;
+    width: 100%;
+    gap: 60px;
+}
+
+.imagePane {
+    flex: 1.2;
+    position: relative;
+    z-index: 2;
+    filter: drop-shadow(0 20px 50px rgba(0, 0, 0, 0.08));
+    /* 🌟 预设高度，防止抖动 */
+    display: flex;
+    align-items: center;
+}
+
+.mockupImg {
+    width: 100%;
+    height: auto;
+    filter: drop-shadow(0 20px 50px rgba(0, 0, 0, 0.08));
+}
+
+/* 右侧文案区 */
+.textPane {
+    flex: 0.8;
+    position: relative;
+}
+
+.inkWrapper {
+    position: relative;
+    margin-bottom: 24px;
+    display: inline-block;
+    /* 让容器随标题宽度缩放 */
+}
+
+/* 标题后的彩色水墨装饰 */
+.titleBgDecor {
+    position: absolute;
+    top: -145px;
+    left: -100px;
+    width: 400px;
+    /* 根据标题长短调整 */
+    height: auto;
+    z-index: -1;
+    /* 🌟 关键：防止图片被继承的样式限制住 */
+    max-width: none !important;
+    object-fit: contain;
+    /* 确保图片比例不变 */
+}
+
+.subTitle {
+    position: relative;
+    z-index: 2;
+    font-size: 36px;
+    font-family: "Hiragino Mincho ProN", serif;
+    color: #333;
+    letter-spacing: 0.05em;
+    margin-left: 86px;
+}
+
+.content {
+    font-size: 16px;
+    line-height: 2.2;
+    color: #2b2b2b;
+    text-align: justify;
+    max-width: 450px;
+}
+
+/* 🌟 サイトを見る 右对齐方案 */
+/* 🌟 修改 linkWrapper：去掉原来的硬边框线，改为相对定位 */
+.linkWrapper {
+    position: relative;
+    padding-top: 24px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+/* 🌟 在 linkWrapper 上方创建一个全宽的基础浅灰色线 (可选，为了还原稿件的横线感) */
+.linkWrapper::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: #eee;
+    /* 基础底线颜色 */
+}
+
+.siteLink {
+    position: relative;
+    /* 必须，作为伪元素的基准 */
+    text-decoration: none;
+    color: #5cc1c9;
+    font-size: 18px;
+    font-family: "Hiragino Mincho ProN", serif;
+    letter-spacing: 0.1em;
+    padding-bottom: 4px;
+    /* 给下划线留一点间距 */
+
+}
+
+/* 🌟 核心：创建从左到右出现的黑线下划线 */
+.siteLink::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    /* 线的长度等于文字长度 */
+    height: 1px;
+    /* 线的粗细 */
+    background-color: #5cc1c9;
+    /* 线的颜色 */
+
+    /* 初始状态：缩放比例为 0，起点在左侧 */
+    transform: scaleX(0);
+    transform-origin: left;
+
+    /* 动画过渡：控制出现的速度 */
+    transition: transform 0.5s ease-in-out;
+}
+
+/* 🌟 Hover 状态：缩放比例回到 1 */
+.siteLink:hover::after {
+    transform: scaleX(1);
+
+}
+
+
+
+.imagePane {
+    flex: 1.2;
+    position: relative;
+    z-index: 2;
+    /* 确保内部元素（视频）也能应用 drop-shadow */
+    filter: drop-shadow(0 20px 50px rgba(0, 0, 0, 0.08));
+}
+
+.mockupImg {
+    width: 100%;
+    height: auto;
+    /* 这里的 filter 已经移到父级 .imagePane 以兼容视频 */
+}
+
+/* 🌟 新增视频专用样式 */
+.videoWrapper {
+    width: 100%;
+    background: #000;
+    border-radius: 8px;
+    overflow: hidden;
+    line-height: 0;
+    /* 🌟 关键：锁定比例 */
+    aspect-ratio: 16 / 9;
+    position: relative;
+}
+
+.videoPlayer {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+}
+
+/* 📱 移动端 (SP) 适配 */
+@media (max-width: 768px) {
+    .mockupSection {
+        padding: 60px 20px;
+        /* 增加上下留白，减少左右边距 */
+        min-height: auto;
+    }
+
+    .container {
+        flex-direction: column;
+        /* 垂直排列：图上文下 */
+        gap: 30px;
+        /* 缩小图片和文字之间的间距 */
+    }
+
+    .imagePane {
+        width: 100%;
+        flex: none;
+        /* 取消 flex 比例 */
+    }
+
+    .textPane {
+        width: 100%;
+        flex: none;
+        /* 取消 flex 比例 */
+    }
+
+    /* 🌟 隐藏标题背后的水墨背景 */
+    .titleBgDecor {
+        display: none !important;
+    }
+
+    .inkWrapper {
+        margin-bottom: 20px;
+        display: block;
+        /* 在手机端改为块级，方便对齐 */
+    }
+
+    .subTitle {
+        font-size: 26px;
+        /* 缩小手机端标题字号 */
+        margin-left: 0;
+        text-align: center;
+        /* 🌟 关键：重置桌面端的左边距偏移 */
+        line-height: 1.4;
+    }
+
+    .content {
+        font-size: 13px;
+        max-width: 100%;
+        /* 内容撑满宽度 */
+        margin-bottom: 30px;
+        line-height: 2.0;
+        /* 稍微压缩行高，适合小屏幕阅读 */
+    }
+
+    .linkWrapper {
+        padding-top: 0px;
+        /* 🌟 建议：手机端“查看网站”链接改为左对齐更符合直觉 */
+    }
+
+    .siteLink {
+        padding-top: 20px;
+        margin-right: 36px;
+        font-size: 16px;
+    }
+
+    /* 原有适配保持不变 */
+    .videoWrapper {
+        margin-bottom: 0;
+        /* 间距由父级 container 的 gap 控制 */
+    }
+}
