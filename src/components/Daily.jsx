@@ -40,7 +40,7 @@ const Daily = () => {
                 <div className={styles.dailyDescBox}>
                     <span className={styles.tag}>#MyLife</span>
                     <p className={styles.descText}>
-                        自分の趣味になり得る、日々のささやかな記録。
+                        自分の趣味や、日々のささやかな記録。
                     </p>
                 </div>
             </div>
