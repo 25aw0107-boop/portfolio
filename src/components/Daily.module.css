@@ -1,7 +1,7 @@
 .dailySection {
     position: relative;
     width: 100%;
-    margin-top: 36px;
+    margin-top: 86px;
 }
 
 /* --- 头部布局：参考 About 并修正右侧导航重叠 --- */
@@ -10,7 +10,7 @@
     justify-content: center;
     align-items: center;
     gap: 16%;
-    margin: 0 auto 46px auto;
+    margin: 0 auto 36px auto;
 }
 
 .titleWrapper {
@@ -52,7 +52,7 @@
     font-size: 14px;
     font-weight: bold;
     display: block;
-    margin-top: 55px;
+    margin-top: 88px;
 }
 
 .descText {
@@ -109,6 +109,18 @@
     box-shadow: 0 10px 25px rgba(74, 154, 156, 0.25);
 }
 
+/* 🌟 核心修复：确保 img 标签完美填充父级容器 */
+.imgBox img {
+    width: 100%;
+    /* 1. 让图片宽度撑满容器 */
+    height: 100%;
+    /* 2. 让图片高度撑满容器 */
+    object-fit: cover;
+    /* 3. 🌟 关键：保持原图比例裁剪，完美填满 270x180 的区域，不拉伸 */
+    display: block;
+    /* 4. 消除图片底部的微小空隙 */
+}
+
 .imgCaption {
     font-size: 14px;
     color: #999;
@@ -138,12 +150,12 @@
 }
 
 .trackLeft {
-    animation: scrollLeft 160s linear infinite;
+    animation: scrollLeft 140s linear infinite;
     will-change: transform;
 }
 
 .trackRight {
-    animation: scrollRight 120s linear infinite;
+    animation: scrollRight 100s linear infinite;
     will-change: transform;
 }
 

@@ -1,5 +1,5 @@
 .aboutSection {
-    max-width: 900px;
+    max-width: 912px;
 
     /* 👇 核心修改在这里：把 margin 拆开写，单独加大 top 的数值 */
     margin-top: 120px;
@@ -53,8 +53,8 @@
 /* 标题背后的水墨背景 */
 .titleBg {
     position: absolute;
-    top: 60%;
-    left: 0%;
+    top: 68%;
+    left: 5%;
     transform: translate(-50%, -50%);
     width: 460px;
     /* 现在你随便改，哪怕 800px 都能生效了 */
@@ -73,7 +73,6 @@
     margin: 0;
     letter-spacing: 5px;
     margin-top: 46px;
-
 }
 
 /* ==================

@@ -1,22 +1,33 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import styles from './Daily.module.css';
 import titleBg from '../assets/标题背景色.png';
 
-// 🌟 1. 批量导入 hobbyImg 文件夹下的所有图片
-const hobbyImages = import.meta.glob('../assets/hobbyImg/*.{png,jpg,jpeg,webp}', { eager: true });
-const imagePaths = Object.values(hobbyImages).map((mod) => mod.default);
+// 🌟 1. 分别批量导入两个文件夹下的图片
+const imagesFolder1 = import.meta.glob('../assets/mylifeImg/1/*.{png,jpg,jpeg,webp}', { eager: true });
+const imagesFolder2 = import.meta.glob('../assets/mylifeImg/2/*.{png,jpg,jpeg,webp}', { eager: true });
 
 const Daily = () => {
-    // 🌟 2. 将图片路径映射到你的数据数组中
-    const baseItems = imagePaths.map((path, i) => ({
-        id: i + 1,
-        text: `Moment ${i + 1}`, // 底部的小字标题
-        imgUrl: path
-    }));
+    // 🌟 2. 处理第一组图片 (文件夹 1)
+    const row1Items = useMemo(() => {
+        const paths = Object.values(imagesFolder1).map((mod) => mod.default);
+        // 复制一份以实现无缝滚动
+        return [...paths, ...paths].map((path, i) => ({
+            id: `row1-${i}`,
+            imgUrl: path,
+            text: `Moment ${i + 1}`
+        }));
+    }, []);
 
-    // 复制一份实现无缝滚动
-    // 注意：为了两行轨道宽度完全一致，我们统一使用这个 extendedItems
-    const extendedItems = [...baseItems, ...baseItems];
+    // 🌟 3. 处理第二组图片 (文件夹 2)
+    const row2Items = useMemo(() => {
+        const paths = Object.values(imagesFolder2).map((mod) => mod.default);
+        // 复制一份以实现无缝滚动
+        return [...paths, ...paths].map((path, i) => ({
+            id: `row2-${i}`,
+            imgUrl: path,
+            text: `Memory ${i + 1}`
+        }));
+    }, []);
 
     return (
         <section className={styles.dailySection} id="daily">
@@ -27,7 +38,7 @@ const Daily = () => {
                 </div>
 
                 <div className={styles.dailyDescBox}>
-                    <span className={styles.tag}>#Hobby</span>
+                    <span className={styles.tag}>#MyLife</span>
                     <p className={styles.descText}>
                         自分の趣味になり得る、日々のささやかな記録。
                     </p>
@@ -35,18 +46,13 @@ const Daily = () => {
             </div>
 
             <div className={styles.carouselContainer}>
-                {/* 第一排：向左滚动 */}
+                {/* 第一排：使用文件夹 1 的图片，向左滚动 */}
                 <div className={styles.carouselRow}>
                     <div className={`${styles.carouselTrack} ${styles.trackLeft}`}>
-                        {extendedItems.map((item, index) => (
-                            <div className={styles.carouselItem} key={`top-${index}`}>
+                        {row1Items.map((item, index) => (
+                            <div className={styles.carouselItem} key={item.id}>
                                 <div className={styles.imgBox}>
-                                    <img
-                                        src={item.imgUrl}
-                                        alt={item.text}
-                                        loading="eager"
-                                        style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                                    />
+                                    <img src={item.imgUrl} alt={item.text} loading="eager" />
                                 </div>
                                 <p className={styles.imgCaption}>{item.text}</p>
                             </div>
@@ -54,19 +60,13 @@ const Daily = () => {
                     </div>
                 </div>
 
-                {/* 第二排：向右滚动 */}
-                {/* 🌟 修复：不再使用 .reverse() 以确保轨道物理长度完全匹配 */}
+                {/* 第二排：使用文件夹 2 的图片，向右滚动 */}
                 <div className={styles.carouselRow}>
                     <div className={`${styles.carouselTrack} ${styles.trackRight}`}>
-                        {extendedItems.map((item, index) => (
-                            <div className={styles.carouselItem} key={`bottom-${index}`}>
+                        {row2Items.map((item, index) => (
+                            <div className={styles.carouselItem} key={item.id}>
                                 <div className={styles.imgBox}>
-                                    <img
-                                        src={item.imgUrl}
-                                        alt={item.text}
-                                        loading="eager"
-                                        style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                                    />
+                                    <img src={item.imgUrl} alt={item.text} loading="eager" />
                                 </div>
                                 <p className={styles.imgCaption}>{item.text}</p>
                             </div>
