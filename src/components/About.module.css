@@ -134,6 +134,7 @@
 /* 右侧图片区 */
 /* 🌟 初始状态：隐藏并在下方 50px 的位置 */
 .imageContent {
+    margin-top: 56px;
     width: 256px;
     flex-shrink: 0;
     overflow: hidden;
