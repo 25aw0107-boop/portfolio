@@ -8,7 +8,6 @@
     overflow: hidden;
     /* 必须隐藏，防止两倍宽的波浪撑开页面 */
     margin: auto;
-    margin-top: 40px;
     margin-bottom: 160px;
 }
 

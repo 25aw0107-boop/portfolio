@@ -4,7 +4,7 @@
     /* 👇 核心修改在这里：把 margin 拆开写，单独加大 top 的数值 */
     margin-top: 120px;
     /* 👈 增加这个数值（比如 200px ~ 300px），距离就拉开了 */
-    margin-bottom: 68px;
+    margin-bottom: 48px;
     /* 底部保持原来的距离 */
     margin-left: auto;
     /* 保持水平居中 */
@@ -134,7 +134,7 @@
 /* 右侧图片区 */
 /* 🌟 初始状态：隐藏并在下方 50px 的位置 */
 .imageContent {
-    margin-top: 56px;
+    margin-top: 40px;
     width: 256px;
     flex-shrink: 0;
     overflow: hidden;
