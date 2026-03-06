@@ -269,29 +269,11 @@
         font-family: "Hiragino Mincho ProN", serif;
         font-size: 18px;
         letter-spacing: 0.6em;
-        height: auto;
+        height: 500px;
         display: block;
         /* 恢复块级，方便定位 */
     }
 
-    /* 精调每一行的错落位置 (参考图 2) */
-    .rakugoText p:nth-child(1) {
-        transform: translateY(0);
-        /* 第一句位置 */
-    }
-
-    .rakugoText p:nth-child(2) {
-        transform: translateY(0);
-        /* 第二句稍微下移，产生高度差 */
-        margin-right: 0.8em;
-        /* 增加行间距 */
-    }
-
-    .rakugoText p:nth-child(3) {
-        transform: translateY(0);
-        /* 第三句稍微上移 */
-        margin-right: 0.8em;
-    }
 
     /* 3. 动画舞台：小船部分 */
     .stage {
