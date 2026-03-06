@@ -24,7 +24,7 @@ const ProjectHero = ({ project }) => {
                 </div>
 
                 {/* 水墨背景图 */}
-                <img src={inkBg} alt="" className={styles.inkDecor} />
+                {/* <img src={inkBg} alt="" className={styles.inkDecor} /> */}
             </div>
 
             {/* 右半边：图片 */}

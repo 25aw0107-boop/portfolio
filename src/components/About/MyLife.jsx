@@ -7,7 +7,7 @@ const MyLife = () => {
     return (
         <section className={styles.lifeSection}>
             {/* 🌟 引入水墨元素 */}
-            <img src={inkBg} className={`${styles.inkSide} ${styles.inkLeft}`} alt="" draggable="false" />
+            {/* <img src={inkBg} className={`${styles.inkSide} ${styles.inkLeft}`} alt="" draggable="false" /> */}
             <img src={inkBg} className={`${styles.inkSide} ${styles.inkRight}`} alt="" draggable="false" />
 
             <div className={styles.container}>

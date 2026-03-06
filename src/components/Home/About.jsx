@@ -31,9 +31,9 @@ const About = () => {
     return (
         <section id="about" className={styles.aboutSection}>
             {/* ... 背景和标题保持不变 ... */}
-            <div className={styles.inkBgRight} aria-hidden="true">
+            {/* <div className={styles.inkBgRight} aria-hidden="true">
                 <img src={bgInk} alt="" className={styles.inkImg} />
-            </div>
+            </div> */}
 
             <div className={styles.titleWrapper}>
                 <img src={titleBg} alt="水墨背景" className={styles.titleBg} />
