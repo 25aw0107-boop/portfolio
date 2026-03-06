@@ -19,14 +19,14 @@
 .infoRow {
     display: flex;
     padding: 40px 0;
-    border-bottom: 1px solid #d1e3f1;
+    border-bottom: 1px solid #eee;
     /* 🌟 核心修改：从 flex-start 改为 center */
     align-items: center;
 }
 
 /* 第一行也要有顶部的线 */
 .infoRow:first-child {
-    border-top: 1px solid #d1e3f1;
+    border-top: 1px solid #eee;
 }
 
 .labelPane {
