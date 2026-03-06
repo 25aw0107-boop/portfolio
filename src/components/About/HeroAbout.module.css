@@ -252,7 +252,7 @@
     /* 1. 太阳：保持在最上方中心 */
     .sunWrapper {
         position: relative;
-        top: 8%;
+        top: 5%;
         left: 0;
         margin-bottom: 6vh;
         width: 178px;
@@ -263,11 +263,11 @@
     /* 2. 落语文字：复刻图 2 的错落感 */
     .rakugoText {
         position: relative;
-        top: 12%;
+        top: 8%;
         right: 0;
         writing-mode: vertical-rl;
         font-family: "Hiragino Mincho ProN", serif;
-        font-size: 1.4rem;
+        font-size: 18px;
         letter-spacing: 0.6em;
         height: auto;
         display: block;
