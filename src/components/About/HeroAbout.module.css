@@ -269,7 +269,7 @@
         font-family: "Hiragino Mincho ProN", serif;
         font-size: 18px;
         letter-spacing: 0.6em;
-        height: 500px;
+        height: 216px;
         display: block;
         /* 恢复块级，方便定位 */
     }
@@ -312,8 +312,9 @@
         bottom: 110px;
     }
 
+    /* 心 */
     .floatingHeart {
-        margin-top: 20px;
+        margin-top: -20px;
         font-size: 24px;
     }
 }
