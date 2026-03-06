@@ -267,11 +267,12 @@
         right: 0;
         writing-mode: vertical-rl;
         font-family: "Hiragino Mincho ProN", serif;
-        font-size: 18px;
+        font-size: 22px;
         letter-spacing: 0.6em;
-        height: 216px;
+        height: 300px;
         display: block;
         /* 恢复块级，方便定位 */
+        line-height: 1;
     }
 
 
@@ -279,12 +280,11 @@
     .stage {
         position: relative;
         width: 100%;
-        margin-top: auto;
         /* 自动推到最底部 */
         height: 420px;
         display: flex;
         justify-content: center;
-        margin-top: 10%;
+        margin: 0;
     }
 
     .boatAndDen {
