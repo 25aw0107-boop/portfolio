@@ -10,7 +10,7 @@
 /* 🌟 半透明蓝绿色背景条 */
 .bgStrip {
     width: 100%;
-    background-color: rgba(210, 233, 231, 0.5);
+    background-color: rgba(210, 233, 231, 0.3);
     /* 蓝绿色半透明 */
     padding: 60px 0;
     display: flex;
@@ -61,7 +61,7 @@
     /* 被选中的变亮 */
 
     /* 🌟 添加蓝绿色投影：使用了多层投影让光晕更自然柔和 */
-    box-shadow: 0 10px 30px rgba(160, 219, 223, 0.3),
+    box-shadow: 0 10px 30px rgba(160, 219, 223, 0.6),
         0 0 15px rgba(0, 0, 0, 0.3);
 
     /* 稍微把被选中的图往上提一点，配合投影更有立体感 */
