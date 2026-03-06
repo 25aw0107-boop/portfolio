@@ -22,7 +22,8 @@
     font-family: "Hiragino Mincho ProN", "Yu Mincho", "Noto Serif JP", serif;
     letter-spacing: 4px;
     color: #333;
-    margin-bottom: 64px;
+    margin-bottom: 52px;
+    margin-top: 0;
 }
 
 /* ==================
@@ -274,9 +275,67 @@
     left: 20px;
 }
 
-/* ==================
-   移动端响应式调整
-================== */
+/* ==========================================
+   🌟 底部查看全部按钮 (恢复 86px 圆圈样式 + 右对齐)
+   ========================================== */
+.viewAllWrapper {
+    width: 100%;
+    /* 确保容器占满宽度 */
+    display: flex;
+    /* 使用 Flex 布局 */
+    justify-content: center;
+    /* 🌟 关键：将 flex-end 改为 center 即可实现居中 */
+    margin-top: 24px;
+    /* 保持你原来的间距 */
+    padding: 0;
+    /* 清除可能的内边距干扰 */
+}
+
+/* 按钮本身的样式（保持你提供的原始代码不变） */
+.viewAllBtn {
+    display: inline-flex;
+    align-items: center;
+    gap: 15px;
+    text-decoration: none;
+    color: #a0dbdf;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.viewAllText {
+    transition: color 0.3s ease;
+}
+
+.viewAllBtn:hover .viewAllText {
+    color: rgb(54, 184, 190);
+}
+
+.arrowCircle {
+    width: 86px;
+    height: 86px;
+    border-radius: 50%;
+    border: 1px solid #e0e0e0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+.viewAllBtn:hover .arrowCircle {
+    background-color: #a0dbdf;
+    border-color: #a0dbdf;
+}
+
+.arrow {
+    font-size: 20px;
+    font-weight: 300;
+    transition: color 0.3s ease;
+}
+
+.viewAllBtn:hover .arrow {
+    color: #ffffff;
+}
+
 /* ==========================================
    移动端响应式调整 (@media (max-width: 768px))
    ========================================== */
@@ -388,5 +447,19 @@
         50% {
             transform: translateX(-50%) translateY(-8px);
         }
+    }
+
+    .viewAllWrapper {
+        justify-content: center;
+        /* 手机端居中对齐 */
+        margin-top: 0;
+        /* 增加一点距离防止挡住波浪 */
+        padding: 0;
+    }
+
+    /* 手机端圆圈可以适当缩小一点点，不缩写也可以，按你喜好 */
+    .arrowCircle {
+        width: 70px;
+        height: 70px;
     }
 }

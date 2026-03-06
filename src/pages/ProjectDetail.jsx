@@ -6,11 +6,11 @@ import { projectsData } from '../data/projectsData';
 // 组件引入
 import PageTransition from '../components/PageTransition';
 import ProjectHeader from '../components/ProjectHeader';
-import ProjectHero from '../components/ProjectHero';
-import ProjectMockup from '../components/ProjectMockup';
-import ProjectInfoTable from '../components/ProjectInfoTable';
-import ProjectReflection from '../components/ProjectReflection';
-import ProjectGallery from '../components/ProjectGallery';
+import ProjectHero from '../components/ProjectDetail/ProjectHero';
+import ProjectMockup from '../components/ProjectDetail/ProjectMockup';
+import ProjectInfoTable from '../components/ProjectDetail/ProjectInfoTable';
+import ProjectReflection from '../components/ProjectDetail/ProjectReflection';
+import ProjectGallery from '../components/ProjectDetail/ProjectGallery';
 import Footer from '../components/Footer';
 
 

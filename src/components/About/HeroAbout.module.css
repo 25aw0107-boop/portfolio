@@ -1,0 +1,337 @@
+.heroSection {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* --- 太阳容器 --- */
+.sunWrapper {
+    position: absolute;
+    top: 18%;
+    left: 22%;
+    width: 200px;
+    height: 80px;
+    z-index: 10;
+    /* 确保缩放时以中心为原点 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.breathingSun {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    /* 🌟 核心：移除投影，改用缩放动画 */
+    box-shadow: none;
+
+    /* 🌟 频率同步：3.5s 需与小船、海浪时间一致 */
+    animation: sunScaleBreath 3.5s ease-in-out infinite;
+    /* 开启硬件加速，确保缩放边缘平滑无锯齿 */
+    will-change: transform;
+}
+
+@keyframes sunScaleBreath {
+
+    0%,
+    100% {
+        /* 初始大小 */
+        transform: scale(1);
+    }
+
+    50% {
+        /* 🌟 呼吸顶点：轻微膨胀 */
+        /* 1.08 是一个比较舒适的比例，既能察觉又不过于剧烈 */
+        transform: scale(1.08);
+    }
+}
+
+/* --- 落语文字排版 --- */
+.rakugoText {
+    position: absolute;
+    top: 26%;
+    right: 33%;
+    writing-mode: vertical-rl;
+    font-family: "Hiragino Mincho ProN", serif;
+    font-size: 1.4rem;
+    letter-spacing: 0.6em;
+    color: #333;
+    z-index: 5;
+}
+
+.accent {
+    color: #C55151;
+}
+
+/* --- 核心动画舞台 (完全复刻你的代码) --- */
+.stage {
+    position: relative;
+    width: 100%;
+    height: 400px;
+    margin-top: 52vh;
+    /* 调整舞台在页面中的高度位置 */
+}
+
+.waveLayer {
+    position: absolute;
+    bottom: 150px;
+    width: 100%;
+    height: 120px;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.foregroundWaves {
+    z-index: 4;
+    bottom: 110px;
+    opacity: 0.6;
+}
+
+.wave {
+    position: absolute;
+    width: 300%;
+    height: 100%;
+    /* 使用你提供的 SVG 参数 */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 300' preserveAspectRatio='none'%3E%3Cpath d='M0,50 Q200,100 400,50 T800,50' fill='none' stroke='%23333333' stroke-width='1.5'/%3E%3C/svg%3E");
+    background-size: 10% 100%;
+    background-repeat: repeat-x;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+.wave1 {
+    top: 0;
+    opacity: 0.5;
+    animation: flowLeft 35s linear infinite;
+}
+
+.wave2 {
+    top: 60px;
+    opacity: 0.3;
+    animation: flowRight 45s linear infinite;
+    transform: scaleY(1.2);
+}
+
+.wave3 {
+    top: 40px;
+    opacity: 0.6;
+    animation: flowLeft 30s linear infinite;
+}
+
+.wave4 {
+    top: 80px;
+    opacity: 0.4;
+    animation: flowRight 50s linear infinite;
+    transform: scaleY(0.8);
+}
+
+@keyframes flowLeft {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+@keyframes flowRight {
+    0% {
+        transform: translateX(-50%);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
+/* --- 主体：小船与伝 --- */
+.boatAndDen {
+    position: absolute;
+    left: 50%;
+    bottom: 198px;
+    /* 确保船底正好切在浪线上 */
+    transform: translateX(-50%);
+    z-index: 3;
+}
+
+.combinedSubject {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* 同步波浪的节奏晃动 */
+    animation: boatRock 7.5s ease-in-out infinite;
+}
+
+.denHalf {
+    width: 268px;
+    height: auto;
+    margin-bottom: -128px;
+    margin-right: 80px;
+    /* 让字插在船里 */
+    opacity: 0.9;
+    /* 帆的细微异步摆动 */
+    animation: sailSway 5s ease-in-out infinite;
+}
+
+.boat {
+    width: 200px;
+    height: auto;
+}
+
+@keyframes boatRock {
+
+    0%,
+    100% {
+        transform: translateY(8px) rotate(-3deg);
+    }
+
+    50% {
+        transform: translateY(-12px) rotate(3deg);
+    }
+}
+
+@keyframes sailSway {
+
+    0%,
+    100% {
+        transform: rotate(-1deg);
+    }
+
+    50% {
+        transform: rotate(3deg) scale(1.02);
+    }
+}
+
+/* HeroAbout.module.css */
+
+/* --- 漂浮的心字 --- */
+.floatingHeart {
+    position: absolute;
+    font-family: "Hiragino Mincho ProN", serif;
+    font-size: 38px;
+    /* 基础字号，大小由 scale 控制 */
+    color: #333;
+    z-index: 2;
+    pointer-events: none;
+    will-change: transform;
+    margin-bottom: 32px;
+    margin-left: 24px;
+    /* 🌟 律动同步：使用 linear 匀速，时间缩短至 3.5s 模拟波浪频率 */
+    animation: heartDesignFloat 3.5s linear infinite;
+}
+
+@keyframes heartDesignFloat {
+
+    0%,
+    100% {
+        /* 🌟 回到在 JSX 里设定好的初始角度和比例 */
+        transform: translateY(0) rotate(var(--baseRotate)) scale(var(--baseScale));
+    }
+
+    50% {
+        /* 🌟 纯粹的垂直起伏，保持角度和比例不变 */
+        transform: translateY(-15px) rotate(var(--baseRotate)) scale(var(--baseScale));
+    }
+}
+
+/* --- 📱 SP (移动端) 垂直一字型布局 (带错落感) --- */
+@media (max-width: 768px) {
+    .heroSection {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        /* 容器主体居中 */
+        justify-content: flex-start;
+        padding-top: 8vh;
+        /* 给顶部留白 */
+        height: 100vh;
+    }
+
+    /* 1. 太阳：保持在最上方中心 */
+    .sunWrapper {
+        position: relative;
+        top: 8%;
+        left: 0;
+        margin-bottom: 6vh;
+        width: 178px;
+        display: flex;
+        justify-content: center;
+    }
+
+    /* 2. 落语文字：复刻图 2 的错落感 */
+    .rakugoText {
+        position: relative;
+        top: 12%;
+        right: 0;
+        writing-mode: vertical-rl;
+        font-family: "Hiragino Mincho ProN", serif;
+        font-size: 1.4rem;
+        letter-spacing: 0.6em;
+        height: auto;
+        display: block;
+        /* 恢复块级，方便定位 */
+    }
+
+    /* 精调每一行的错落位置 (参考图 2) */
+    .rakugoText p:nth-child(1) {
+        transform: translateY(0);
+        /* 第一句位置 */
+    }
+
+    .rakugoText p:nth-child(2) {
+        transform: translateY(0);
+        /* 第二句稍微下移，产生高度差 */
+        margin-right: 0.8em;
+        /* 增加行间距 */
+    }
+
+    .rakugoText p:nth-child(3) {
+        transform: translateY(0);
+        /* 第三句稍微上移 */
+        margin-right: 0.8em;
+    }
+
+    /* 3. 动画舞台：小船部分 */
+    .stage {
+        position: relative;
+        width: 100%;
+        margin-top: auto;
+        /* 自动推到最底部 */
+        height: 420px;
+        display: flex;
+        justify-content: center;
+        margin-top: 10%;
+    }
+
+    .boatAndDen {
+        left: 50%;
+        bottom: 172px;
+        transform: translateX(-50%);
+    }
+
+    .denHalf {
+        width: 160px;
+        margin-bottom: -75px;
+        margin-right: 45px;
+    }
+
+    .boat {
+        width: 120px;
+    }
+
+    .wave {
+        background-size: 25% 100%;
+    }
+
+    /* 4. 波浪和心字同步调整 */
+    .waveLayer {
+        bottom: 110px;
+    }
+
+    .floatingHeart {
+        margin-top: 20px;
+        font-size: 24px;
+    }
+}

@@ -3,12 +3,12 @@ import { Link } from 'react-router-dom';
 import styles from './Works.module.css';
 
 // 🌟 引入外部数据
-import { projectsData } from '../data/projectsData';
+import { projectsData } from '../../data/projectsData';
 
 // 導入タイトル水墨背景
-import inkTitleBg from '../assets/标题背景色.png';
+import inkTitleBg from '../../assets/标题背景色.png';
 // 導入大塊背景水墨
-import bgInk from '../assets/背景水墨.png';
+import bgInk from '../../assets/背景水墨.png';
 
 export default function Works() {
     return (

@@ -1,0 +1,256 @@
+.lifeSection {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    /* 必须为 relative 供水墨图片定位 */
+    user-select: none;
+    -webkit-user-select: none;
+    margin-top: 44px;
+}
+
+/* --- 🌟 水墨元素基础样式 --- */
+.inkSide {
+    position: absolute;
+    top: 50%;
+    /* 这里的 translateY(-50%) 负责垂直居中，
+       如果你需要额外的旋转（如 rotate），也写在这里面 */
+    transform: translateY(-50%);
+    opacity: 1;
+    z-index: -1;
+    pointer-events: none !important;
+    max-width: none !important;
+    object-fit: contain;
+
+}
+
+/* 🌟 左侧水墨：从中轴线往左推 */
+.inkLeft {
+    width: 999px;
+    left: 50%;
+    /* 假设容器宽 900px，一半是 450px。
+       我们要让它去左边，所以 margin-left 设为负数。
+       -900px 会让图片的左边缘位于容器最左侧。你可以根据素材调整这个值 */
+    margin-left: -1000px;
+}
+
+/* 🌟 右侧水墨：从中轴线往右推 */
+.inkRight {
+    left: 50%;
+    /* 正值往右推。
+       450px 会让图片起始点位于容器右边缘。
+       这里我加上镜像翻转，让两边看起来不重复 */
+    margin-left: 156px;
+    margin-top: 340px;
+    transform: translateY(-50%) scaleX(-1);
+    opacity: 0.7;
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    max-width: 900px;
+    width: 90%;
+}
+
+/* --- 左侧文字 --- */
+.textContent {
+    flex: 1;
+    font-family: "Hiragino Mincho ProN", serif;
+    color: #333;
+    /* 增加一点右边距，给中间的 originTag 留出呼吸感 */
+    margin-right: 20px;
+}
+
+.accent {
+    color: #C55151;
+}
+
+.mainTitle {
+    font-size: 2rem;
+    margin-bottom: 24px;
+    letter-spacing: 0.1em;
+    font-family: "Hiragino Mincho ProN", "Yu Mincho", "Noto Serif JP", serif;
+}
+
+.experienceList p {
+    font-size: 1.2rem;
+    line-height: 2.2;
+    margin: 0;
+    letter-spacing: 0.05em;
+    margin-left: 36px;
+}
+
+.signature {
+    margin-top: 24px;
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.name {
+    font-size: 1.4rem;
+    letter-spacing: 0.2em;
+    position: relative;
+    display: flex;
+    align-items: center;
+    /* 确保线和文字垂直居中对齐 */
+}
+
+.name::before {
+    content: "";
+    display: inline-block;
+
+    /* --- 粗细调节在这里 --- */
+    height: 1px;
+    /* 你觉得粗就改 0.5px 或 1px */
+
+    /* --- 长度调节在这里 --- */
+    width: 40px;
+
+    background-color: #333;
+    /* 线条颜色 */
+    margin-right: 15px;
+    /* 线条与文字的间距 */
+
+    /* 如果想微调线条的垂直偏移，可以用 transform */
+    /* transform: translateY(1px); */
+}
+
+/* --- 中间垂直标识 --- */
+.originTag {
+    writing-mode: vertical-rl;
+    font-family: "Hiragino Mincho ProN", serif;
+    font-size: 0.9rem;
+    color: #666;
+    letter-spacing: 0.5em;
+    border-right: 1px solid #eee;
+
+    /* 🌟 核心修改：让该元素在交叉轴上靠顶对齐 */
+    align-self: flex-start;
+
+    /* 🌟 细节微调：靠顶后，可以加点顶部的 padding 或 margin 
+       防止贴死，这样视觉上更美观 */
+    margin-top: 8px;
+    padding-bottom: 10px;
+    /* 延长分割线感 */
+}
+
+/* --- 右侧照片 --- */
+.imageWrapper {
+    /* 🌟 修改点：取消 flex: 1 */
+    /* flex: 0 1 auto 表示不强行平分空间，宽度由图片决定 */
+    flex: 0 1 auto;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    /* 配合你靠顶对齐的风格 */
+}
+
+.profilePhoto {
+    /* 保持原样，它是美感的来源 */
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+    object-fit: cover;
+    -webkit-user-drag: none;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+/* --- 📱 SP (移动端) 垂直流排版 --- */
+@media (max-width: 768px) {
+    .lifeSection {
+        padding: 0;
+        /* 适当减小 padding，让内容在小屏上更紧凑 */
+    }
+
+    .container {
+        /* 1. 核心修改：改为垂直排列，且不反转 (文字在上，照片在下) */
+        flex-direction: column;
+        gap: 24px;
+        width: 85%;
+        /* 手机端稍微收窄，增加两侧留白感 */
+    }
+
+    /* 2. 隐藏“中国出身”标签 */
+    .originTag {
+        display: none;
+    }
+
+    /* 3. 文字区域调整 */
+    .textContent {
+        margin-right: 0;
+        width: 100%;
+    }
+
+    .mainTitle {
+        font-size: 1.8rem;
+        /* 缩小标题，防止折行过多 */
+        margin-bottom: 12px;
+        text-align: center;
+        /* 标题居中显得更有仪式感 */
+    }
+
+    .experienceList p {
+        font-size: 1rem;
+        margin-left: 36px;
+        /* 诗歌般居中排列，或者左对齐，建议居中更美 */
+        line-height: 1.9;
+
+    }
+
+    .signature {
+        margin-top: 12px;
+        margin-right: 24px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        /* 签名区整体靠右 */
+    }
+
+    /* 4. 照片区域调整 */
+    .imageWrapper {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        /* 🌟 你设定的固定高度 */
+        height: 240px;
+        /* 🌟 确保子元素超出部分被切掉 */
+        overflow: hidden;
+        /* 🌟 增加一点画框圆角（可选，增加精致感） */
+        border-radius: 4px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .profilePhoto {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center 20%;
+        transform: none !important;
+    }
+
+
+    /* 🌟 4. 水墨背景：沿用中轴线偏移法 (针对移动端窄屏微调) */
+    .inkSide {
+        height: 80%;
+        opacity: 1;
+    }
+
+    .inkLeft {
+        left: 50%;
+        /* 往左推，数值减小以适配窄屏 */
+        margin-left: -550px;
+        margin-top: -220px;
+    }
+
+    .inkRight {
+        left: 50%;
+        /* 往右推 */
+        margin-left: -100px;
+        transform: translateY(-50%) scaleX(-1);
+    }
+}

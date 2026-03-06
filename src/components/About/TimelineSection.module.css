@@ -1,0 +1,243 @@
+/* --- 基础容器 --- */
+.timelineSection {
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 36px;
+}
+
+.inkBg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateY(-50%);
+    margin-left: -900px;
+    width: 1200px;
+    opacity: 0.25;
+    z-index: 0;
+    pointer-events: none;
+}
+
+/* --- 标题区域 --- */
+.titleWrapper {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.sectionTitle {
+    font-family: "Hiragino Mincho ProN", serif;
+    font-size: 20px;
+    line-height: 2.2;
+    /* 日文排版通常需要较大的行高 */
+    color: #444;
+    text-align: justify;
+    margin: 0;
+}
+
+.titleInk {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 260px;
+    opacity: 0.7;
+    z-index: -1;
+}
+
+/* --- 时间轴结构 --- */
+.timelineContainer {
+    position: relative;
+    width: 100%;
+    max-width: 800px;
+}
+
+.centerLine {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background-color: #d6d6d6;
+    transform: translateX(-50%);
+}
+
+.timelineItem {
+    display: flex;
+    width: 100%;
+    position: relative;
+    margin-bottom: 80px;
+}
+
+/* 🌟 核心：圆点精准定位在竖线上 */
+.node {
+    position: absolute;
+    left: 50%;
+    /* 这个 top 值要对应标题下划线的高度 */
+    top: 78px;
+    width: 35px;
+    height: 35px;
+    background-color: #d1e8e9;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 4;
+    margin-left: -17.5px;
+    margin-top: -17.5px;
+}
+
+/* 🌟 核心：左右布局 */
+.leftSide {
+    justify-content: flex-start;
+}
+
+.rightSide {
+    justify-content: flex-end;
+}
+
+.contentCard {
+    width: 42%;
+    position: relative;
+}
+
+.leftSide .contentCard {
+    text-align: left;
+    margin-left: 5%;
+}
+
+.rightSide .contentCard {
+    text-align: left;
+    margin-right: 5%;
+}
+
+/* --- 文字样式 --- */
+.tag {
+    font-size: 0.8rem;
+    color: #add8e6;
+    letter-spacing: 0.1em;
+}
+
+.itemTitle {
+    font-size: 1.8rem;
+    margin: 10px 0;
+    color: #333;
+    font-family: "Hiragino Mincho ProN", serif;
+    position: relative;
+    /* 为下划线提供基准 */
+}
+
+/* 🌟 核心：这就是你要的那根线 */
+.decorLine {
+    position: absolute;
+    bottom: -10px;
+    height: 1px;
+    background-color: #ccc;
+    z-index: 3;
+    /* 🌟 新增：确保动画缩放是以横向为主 */
+    transform-origin: inherit;
+}
+
+/* 左侧模式：线往右侧（中央竖线）延伸 */
+.leftSide .decorLine {
+    left: 0;
+    /* 关键：宽度直接拉到中央竖线位置 */
+    right: -11.5%;
+}
+
+/* 右侧模式：线往左侧（中央竖线）延伸 */
+.rightSide .decorLine {
+    right: 0;
+    /* 关键：宽度直接拉到中央竖线位置 */
+    left: -11.5%;
+}
+
+.itemText {
+    font-size: 0.95rem;
+    line-height: 2;
+    color: #666;
+    margin-top: 25px;
+}
+
+.bottomText {
+    margin-top: 16px;
+    color: #aaa;
+    letter-spacing: 0.2em;
+}
+
+/* --- 📱 移动端适配 --- */
+@media (max-width: 768px) {
+    .timelineSection{
+        padding: 60px 0;
+    }
+
+    /* 1. 竖线固定在左侧 30px 处 */
+    .centerLine {
+        top: 30px;
+        left: 30px;
+        transform: none;
+        /* 取消居中的平移 */
+    }
+
+    /* 2. 项目容器统一向右挤，留出左侧空间 */
+    .timelineItem {
+        padding-left: 48px;
+        /* 给竖线和圆点留出充足空间 */
+        justify-content: flex-start !important;
+        /* 全部强制靠左 */
+        margin-bottom: 50px;
+        /* 移动端间距缩小一点 */
+    }
+
+    .itemText {
+        margin-top: 0;
+    }
+
+
+    /* 3. 圆点精准压在竖线上 (left: 30px) */
+    .node {
+        left: 30px;
+        top: 55px;
+        /* 调低一点，对齐第一行 Tag */
+        width: 25px;
+        /* 移动端圆点稍微调小 */
+        height: 25px;
+        margin-left: -12.5px;
+        /* 宽度的一半，确保中心对齐 */
+        margin-top: 0;
+    }
+
+    /* 4. 卡片宽度撑满 */
+    .contentCard {
+        width: 90% !important;
+        text-align: left !important;
+        margin: 0 !important;
+    }
+
+    /* 5. 标题与下划线修正 */
+    .itemTitle {
+        font-size: 1.4rem;
+        /* 移动端字号缩小 */
+    }
+
+    .decorLine {
+        left: -30px !important;
+        /* 横线往左延伸，直接撞到竖线上 */
+        right: auto !important;
+        width: 128px !important;
+        /* 长度固定为 30px 即可 */
+        bottom: -5px;
+        /* 贴紧标题底部 */
+        transform-origin: left !important;
+        /* 移动端统一从左侧向右生长 */
+    }
+
+    /* 6. 背景水墨图在移动端缩小，避免遮挡文字 */
+    .inkBg {
+        width: 600px;
+        margin-left: -300px;
+    }
+}

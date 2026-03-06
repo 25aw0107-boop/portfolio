@@ -1,0 +1,184 @@
+.strengthsSection {
+    width: 100%;
+    position: relative;
+    /* 必须，供背景定位 */
+    display: flex;
+    justify-content: center;
+    padding-top: 86px;
+}
+
+/* 🌟 左右装饰水墨基础样式 */
+.decorationInk {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    z-index: 0;
+    max-width: none;
+}
+
+.inkPosLeft {
+    left: 50%;
+    margin-left: -2000px;
+    /* 根据图片宽度调整，将其推向视口左侧 */
+    width: 1800px;
+    opacity: 0.8;
+
+}
+
+.inkPosRight {
+    left: 50%;
+    margin-top: -700px;
+    margin-left: 200px;
+    /* 将其推向视口右侧 */
+    width: 1700px;
+}
+
+.contentContainer {
+    max-width: 1000px;
+    width: 90%;
+    position: relative;
+    z-index: 1;
+    /* 确保文字在水墨之上 */
+    display: flex;
+    flex-direction: column;
+
+}
+
+/* 🌟 标题左对齐逻辑 */
+.titleWrapper {
+    position: relative;
+    display: inline-block;
+    /* 宽度随文字，方便底纹定位 */
+    align-self: flex-start;
+    /* 关键：强制在 Flex 容器中靠左 */
+    margin-bottom: 128px;
+    margin-left: 20px;
+    /* 适当给点左边距，不贴死 */
+}
+
+.sectionTitle {
+    font-size: 33px;
+    font-family: "Hiragino Mincho ProN", "Yu Mincho", "Noto Serif JP", serif;
+    color: #333;
+    margin: 0;
+    letter-spacing: 5px;
+    margin-left: 88px;
+}
+
+.titleInk {
+    position: absolute;
+    top: 50%;
+    left: 40%;
+    transform: translate(-50%, -50%);
+    width: 360px;
+    /* 现在你随便改，哪怕 800px 都能生效了 */
+
+    /* 👇 核心魔法：解除全局图片的宽度限制 */
+    max-width: none;
+
+    z-index: -1;
+    opacity: 0.8;
+}
+
+/* 列表样式 */
+.listWrapper {
+    width: 100%;
+    border-top: 1px solid #eee;
+    /* 顶部第一条分割线 */
+}
+
+.strengthItem {
+    display: flex;
+    padding: 50px 0;
+    border-bottom: 1px solid #eee;
+    gap: 100px;
+}
+
+.leftCol {
+    flex: 0 0 220px;
+    /* 固定左侧标题宽度 */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.itemTag {
+    font-size: 0.9rem;
+    color: #d8d8d8;
+}
+
+.itemTitle {
+    font-family: "Hiragino Mincho ProN", serif;
+    font-size: 24px;
+    color: #83afbd;
+
+    font-weight: 500;
+    margin: 12px 0;
+
+}
+
+.rightCol {
+    flex: 1;
+}
+
+.itemContent {
+    font-family: "Hiragino Sans", sans-serif;
+    font-size: 15px;
+    line-height: 2.2;
+    color: #555;
+    text-align: justify;
+}
+
+/* --- 📱 移动端适配 --- */
+@media (max-width: 768px) {
+    .strengthsSection {
+        padding-top: 26px;
+    }
+
+    .sectionTitle {
+        font-size: 38px;
+        margin: 0;
+        letter-spacing: 5px;
+        margin-left: 28px;
+    }
+
+    .titleInk {
+        top: 50%;
+        left: 20%;
+        width: 260px;
+    }
+
+    .titleWrapper {
+        align-self: center;
+        /* 手机端标题建议回归居中，更好看 */
+        margin-left: 0;
+        margin-bottom: 40px;
+    }
+
+    .itemContent {
+        padding: 0 20px;
+        margin: 0;
+    }
+
+    .sectionTitle {
+        font-size: 1.8rem;
+    }
+
+    .strengthItem {
+        flex-direction: column;
+        gap: 0;
+        padding: 30px 0;
+    }
+
+    .leftCol {
+        flex: none;
+        width: 100%;
+    }
+
+    .decorationInk {
+        width: 500px;
+        opacity: 0.2;
+        /* 手机端减弱背景，避免干扰阅读 */
+    }
+}

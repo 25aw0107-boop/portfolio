@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'; // 加上 useEffect
 import ProjectHeader from '../components/ProjectHeader';
+import Footer from '../components/Footer';
 import PageTransition from '../components/PageTransition';
 import { projectsData } from '../data/projectsData';
 import { Link } from 'react-router-dom';
@@ -7,7 +8,7 @@ import styles from './Works.module.css';
 
 import bgInk from '../assets/背景水墨.png';
 import titleInk from '../assets/标题背景色.png';
-import Footer from '../components/Footer';
+
 
 export default function Works() {
     // 1. 设置初始分类为 'web-site'

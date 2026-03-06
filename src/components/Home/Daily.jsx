@@ -1,10 +1,10 @@
 import React, { useMemo } from 'react';
 import styles from './Daily.module.css';
-import titleBg from '../assets/标题背景色.png';
+import titleBg from '../../assets/标题背景色.png';
 
 // 🌟 1. 分别批量导入两个文件夹下的图片
-const imagesFolder1 = import.meta.glob('../assets/mylifeImg/1/*.{png,jpg,jpeg,webp}', { eager: true });
-const imagesFolder2 = import.meta.glob('../assets/mylifeImg/2/*.{png,jpg,jpeg,webp}', { eager: true });
+const imagesFolder1 = import.meta.glob('../../assets/mylifeImg/1/*.{png,jpg,jpeg,webp}', { eager: true });
+const imagesFolder2 = import.meta.glob('../../assets/mylifeImg/2/*.{png,jpg,jpeg,webp}', { eager: true });
 
 const Daily = () => {
     // 🌟 2. 处理第一组图片 (文件夹 1)

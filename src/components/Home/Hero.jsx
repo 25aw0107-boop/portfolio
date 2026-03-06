@@ -2,10 +2,10 @@ import React from 'react';
 import styles from './Hero.module.css';
 
 // 导入图片资源
-import logo from "../assets/logo.png";
-import sky from "../assets/主视觉背景天空.png";
-import mount from "../assets/主视觉背景山脉.png";
-import bgInk from "../assets/背景水墨.png";
+import logo from "../../assets/logo.png";
+import sky from "../../assets/主视觉背景天空.png";
+import mount from "../../assets/主视觉背景山脉.png";
+import bgInk from "../../assets/背景水墨.png";
 
 const Hero = () => {
     return (

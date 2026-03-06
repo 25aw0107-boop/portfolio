@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './ProjectMockup.module.css';
-import titleBg from '../assets/标题背景色.png';
+import titleBg from '../../assets/标题背景色.png';
 
 export default function ProjectMockup({ project }) {
     // 判定是否为视频分类

@@ -26,3 +26,27 @@ body {
 * {
   cursor: none !important;
 }
+
+/* 屏蔽所有图片的选中、拖拽和弹出菜单 */
+img {
+  /* 禁用鼠标选中（不会出现蓝色高亮） */
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+
+  /* 禁用浏览器原生拖拽行为 */
+  -webkit-user-drag: none;
+
+  /* 禁止长按或右键弹出保存菜单（可选，提升沉浸感） */
+  -webkit-touch-callout: none;
+}
+
+/* 如果你的背景图是写在 div 的 background-image 里的 */
+.heroSection,
+.sunWrapper,
+.stage,
+.wave {
+  user-select: none;
+  -webkit-user-drag: none;
+}

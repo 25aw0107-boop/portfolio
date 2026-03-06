@@ -1,8 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styles from './ProjectHero.module.css';
-import logo from '../assets/logo.png';
-import inkBg from '../assets/背景水墨.png';
+import inkBg from '../../assets/背景水墨.png';
 
 
 const ProjectHero = ({ project }) => {

@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react'; // 🌟 增加 useRef, useState
 import styles from './About.module.css';
-import titleBg from '../assets/标题背景色.png';
-import bgInk from '../assets/背景水墨.png';
-import profilePhoto from '../assets/写真1.jpg';
+import titleBg from '../../assets/标题背景色.png';
+import bgInk from '../../assets/背景水墨.png';
+import profilePhoto from '../../assets/写真1.jpg';
 
 const About = () => {
     const imageRef = useRef(null);

@@ -1,8 +1,8 @@
 // src/components/ProjectReflection.jsx
 import React from 'react';
 import styles from './ProjectReflection.module.css';
-import titleBg from '../assets/标题背景色.png';
-import bgInk from '../assets/背景水墨.png'; // 🌟 引入水墨图
+import titleBg from '../../assets/标题背景色.png';
+import bgInk from '../../assets/背景水墨.png'; // 🌟 引入水墨图
 
 export default function ProjectReflection({ project }) {
     if (!project.reflections) return null;

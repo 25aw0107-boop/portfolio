@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import ProjectDetail from "./pages/ProjectDetail";
 import Works from "./pages/Works";
+// 🌟 核心修复：引入你刚刚新建的 About 页面
+import About from "./pages/About";
 import ScrollToTop from "./components/ScrollToTop";
 import Lenis from '@studio-freight/lenis'
 import "./App.css";
@@ -79,6 +81,7 @@ export default function App() {
         <Route path="/" element={<Home />} />
         <Route path="/works" element={<Works />} />
         <Route path="/project/:id" element={<ProjectDetail />} />
+        <Route path="/about" element={<About />} />
       </Routes>
     </Router>
   );

@@ -1,0 +1,118 @@
+.detailsSection {
+    width: 100%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    margin-top: 46px;
+}
+
+/* 🌟 背景水墨：left: 50% + margin-left 锁定位置 */
+.inkBg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateY(-50%);
+    /* 向左偏移 800px，确保它在屏幕变窄时相对于内容位置不变 */
+    margin-left: -1400px;
+    margin-top: 500px;
+    width: auto;
+    opacity: 1;
+    z-index: -1;
+    pointer-events: none;
+    max-width: none !important;
+    opacity: 0.7;
+    width: 1500px;
+}
+
+.container {
+    max-width: 800px;
+    width: 90%;
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.subTitle {
+    font-family: "Hiragino Mincho ProN", serif;
+    font-size: 1.6rem;
+    color: #333;
+    position: relative;
+    display: inline-block;
+    margin: 0 0 0 -24px;
+
+}
+
+
+.description {
+    font-family: "Hiragino Sans", sans-serif;
+    font-size: 15px;
+    line-height: 2.2;
+    /* 日文排版通常需要较大的行高 */
+    color: #444;
+    text-align: justify;
+}
+
+/* --- 📱 移动端适配 --- */
+@media (max-width: 768px) {
+    .detailsSection {
+        margin-top: 30px;
+        /* 缩小顶部间距 */
+        padding: 0 20px;
+        /* 增加左右内边距，防止文字贴边 */
+    }
+
+    /* 1. 背景水墨：在移动端重新定位，避免飘出屏幕外 */
+    .inkBg {
+        width: 1000px;
+        /* 缩小背景图宽度 */
+        margin-left: -500px;
+        /* 居中对齐 */
+        margin-top: 200px;
+        /* 向上微调 */
+        opacity: 0.4;
+        /* 移动端背景通常调浅一点，增加文字可读性 */
+    }
+
+    /* 2. 容器：宽度设为 100% 靠左右 padding 控制 */
+    .container {
+        width: 100%;
+        gap: 16px;
+        /* 缩小元素间距 */
+    }
+
+    /* 3. 子标题：取消桌面端的负 margin，避免标题被裁切 */
+    .subTitle {
+        font-size: 1.3rem;
+        /* 减小字号 */
+        margin: 0;
+        /* 回归标准位置 */
+        padding-left: 10px;
+        border-left: 5px solid #d1e8e9;
+        /* 可选：增加一个小边框增强视觉引导 */
+    }
+
+    /* 4. 正文描述：优化行高和对齐 */
+    .description {
+        font-size: 14px;
+        /* 移动端标准字号 */
+        line-height: 1.8;
+        /* 稍微收紧行高，避免页面过长 */
+        text-align: left;
+        /* 移动端左对齐比两端对齐视觉上更舒适 */
+        padding: 0 30px;
+    }
+}
+
+/* 针对极窄屏幕（如 iPhone SE） */
+@media (max-width: 375px) {
+    .subTitle {
+        font-size: 1.2rem;
+    }
+
+    .description {
+        letter-spacing: 0;
+        /* 取消字符间距避免排版过挤 */
+    }
+}
