@@ -236,8 +236,7 @@
 
     /* 🌟 4. 水墨背景：沿用中轴线偏移法 (针对移动端窄屏微调) */
     .inkSide {
-        height: 80%;
-        opacity: 1;
+        display: none;
     }
 
     .inkLeft {

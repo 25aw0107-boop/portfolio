@@ -170,7 +170,7 @@
 
 /* --- 📱 移动端适配 --- */
 @media (max-width: 768px) {
-    .timelineSection{
+    .timelineSection {
         padding: 60px 0;
     }
 
@@ -237,7 +237,6 @@
 
     /* 6. 背景水墨图在移动端缩小，避免遮挡文字 */
     .inkBg {
-        width: 600px;
-        margin-left: -300px;
+        display: none;
     }
 }
