@@ -268,7 +268,7 @@
         writing-mode: vertical-rl;
         font-family: "Hiragino Mincho ProN", serif;
         font-size: 22px;
-        letter-spacing: 0.6em;
+        letter-spacing: 0.4em;
         height: 300px;
         display: block;
         /* 恢复块级，方便定位 */
