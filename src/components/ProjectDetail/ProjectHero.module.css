@@ -101,6 +101,8 @@
     pointer-events: none;
     object-fit: contain;
     /* 确保图片比例不变 */
+    opacity: 0.6;
+
 }
 
 /* 右半边：图片 */

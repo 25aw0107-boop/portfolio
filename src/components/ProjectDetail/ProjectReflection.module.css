@@ -98,6 +98,7 @@
     max-width: none !important;
     /* 🌟 关键：从页面中心开始定位 */
     left: 50%;
+    opacity: 0.8;
 }
 
 /* 🌟 右上角固定：以中心线为准向右推 */
@@ -115,7 +116,7 @@
     width: 1160px;
     bottom: -150px;
     /* 负值表示向左推 */
-    opacity: 0.8;
+    opacity: 0.6;
     margin-left: -1200px;
     transform: scaleX(-1) rotate(10deg);
 }

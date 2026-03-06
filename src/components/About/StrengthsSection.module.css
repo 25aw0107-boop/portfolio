@@ -22,7 +22,7 @@
     margin-left: -2000px;
     /* 根据图片宽度调整，将其推向视口左侧 */
     width: 1800px;
-    opacity: 0.8;
+    opacity: 0.6;
 
 }
 
@@ -32,6 +32,7 @@
     margin-left: 200px;
     /* 将其推向视口右侧 */
     width: 1700px;
+    opacity: 0.8;
 }
 
 .contentContainer {
@@ -177,8 +178,6 @@
     }
 
     .decorationInk {
-        width: 500px;
-        opacity: 0.2;
-        /* 手机端减弱背景，避免干扰阅读 */
+        display: none;
     }
 }

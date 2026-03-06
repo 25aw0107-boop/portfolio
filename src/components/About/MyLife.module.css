@@ -17,7 +17,7 @@
     /* 这里的 translateY(-50%) 负责垂直居中，
        如果你需要额外的旋转（如 rotate），也写在这里面 */
     transform: translateY(-50%);
-    opacity: 1;
+    opacity: 0.5;
     z-index: -1;
     pointer-events: none !important;
     max-width: none !important;
@@ -44,7 +44,7 @@
     margin-left: 156px;
     margin-top: 340px;
     transform: translateY(-50%) scaleX(-1);
-    opacity: 0.7;
+    opacity: 0.5;
 }
 
 .container {
@@ -237,19 +237,5 @@
     /* 🌟 4. 水墨背景：沿用中轴线偏移法 (针对移动端窄屏微调) */
     .inkSide {
         display: none;
-    }
-
-    .inkLeft {
-        left: 50%;
-        /* 往左推，数值减小以适配窄屏 */
-        margin-left: -550px;
-        margin-top: -220px;
-    }
-
-    .inkRight {
-        left: 50%;
-        /* 往右推 */
-        margin-left: -100px;
-        transform: translateY(-50%) scaleX(-1);
     }
 }

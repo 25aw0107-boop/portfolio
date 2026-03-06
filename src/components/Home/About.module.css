@@ -23,7 +23,7 @@
     z-index: -1;
     /* 改成 -1 即可，-10 太容易被彻底垫底压死 */
     pointer-events: none;
-    opacity: 1;
+    opacity: 0.6;
     transform: rotate(15deg);
     width: 110%;
     /* 稍微放大一点，让它更有张力 */

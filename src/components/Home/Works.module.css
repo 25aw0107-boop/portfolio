@@ -18,7 +18,7 @@
     position: absolute;
     z-index: -20;
     pointer-events: none;
-    opacity: 1;
+    opacity: 0.8;
     width: 1160px;
     max-width: 120vw;
 }
@@ -34,6 +34,8 @@
     bottom: -10%;
     left: -60%;
     transform: scaleX(-1) rotate(10deg);
+    opacity: 0.6;
+
 }
 
 /* ==================
@@ -300,7 +302,7 @@
         /* 覆盖之前的 none，让它们显示出来 */
         z-index: -1;
         /* 提上来一点，防止被彻底压在白底下面 */
-        opacity: 1;
+        opacity: 0.8;
         /* 调低透明度！手机上字和图很满，水墨太深会看不清内容 */
         width: 180%;
         /* 用百分比自适应手机屏幕 */
@@ -317,6 +319,8 @@
         bottom: 0%;
         left: -70%;
         transform: scaleX(-1) rotate(10deg);
+        opacity: 0.6;
+
     }
 
     .titleWrapper {
