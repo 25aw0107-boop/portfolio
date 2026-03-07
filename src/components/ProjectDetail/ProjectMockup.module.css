@@ -61,6 +61,7 @@
     max-width: none !important;
     object-fit: contain;
     /* 确保图片比例不变 */
+    opacity: 0.8;
 }
 
 .subTitle {

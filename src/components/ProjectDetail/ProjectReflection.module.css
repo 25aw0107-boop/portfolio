@@ -35,14 +35,12 @@
     width: 340px;
     /* 根据图片比例和文字长度调整 */
     height: auto;
-    opacity: 1;
+    opacity: 0.8;
     /* 保持半透明，更自然 */
     z-index: -1;
     /* 放在文字下面 */
-    pointer-events: none;
-    /* 确保不影响文字选中 */
-    /* 🌟 关键：防止图片被继承的样式限制住 */
     max-width: none !important;
+    /* 🌟 关键：防止图片被继承的样式限制住 */
     object-fit: contain;
     /* 确保图片比例不变 */
 }
@@ -146,8 +144,6 @@
         /* 相应调整偏移量 */
         left: -60px;
         /* 相应调整偏移量 */
-        opacity: 0.8;
-        /* 手机端背景稍淡一点，增加文字清晰度 */
     }
 
     .title {
