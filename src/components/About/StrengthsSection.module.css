@@ -4,7 +4,7 @@
     /* 必须，供背景定位 */
     display: flex;
     justify-content: center;
-    padding-top: 86px;
+    padding-top: 126px;
 }
 
 /* 🌟 左右装饰水墨基础样式 */
@@ -53,7 +53,7 @@
     /* 宽度随文字，方便底纹定位 */
     align-self: flex-start;
     /* 关键：强制在 Flex 容器中靠左 */
-    margin-bottom: 128px;
+    margin-bottom: 68px;
     margin-left: 20px;
     /* 适当给点左边距，不贴死 */
 }
@@ -65,11 +65,12 @@
     margin: 0;
     letter-spacing: 5px;
     margin-left: 88px;
+    margin-top: 30px;
 }
 
 .titleInk {
     position: absolute;
-    top: 50%;
+    top: 65%;
     left: 40%;
     transform: translate(-50%, -50%);
     width: 360px;

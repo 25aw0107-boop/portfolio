@@ -170,7 +170,8 @@
 }
 
 .bottomText {
-    margin-top: 92px;
+    margin-top: 12px;
+    margin-bottom: 32px;
     color: #aaa;
     letter-spacing: 0.2em;
 }
