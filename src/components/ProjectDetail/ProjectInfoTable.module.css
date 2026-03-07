@@ -95,7 +95,7 @@
     .label {
         font-size: 15px;
         /* 稍微缩小标签字号 */
-        color: #48a8a8;
+        color: #83afbd;
         /* 增加对比度 */
         position: relative;
         display: inline-block;
@@ -108,7 +108,7 @@
     }
 
     .valueText {
-        font-size: 13.5px;
+        font-size: 14px;
         /* 手机端 13.5px - 14px 最适合阅读 */
         line-height: 1.7;
         /* 稍微收紧行高，增强紧凑感 */

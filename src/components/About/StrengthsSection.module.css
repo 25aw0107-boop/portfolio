@@ -166,6 +166,17 @@
         font-size: 1.8rem;
     }
 
+    .itemContent {
+        font-size: 14px;
+        /* 手机端 13.5px - 14px 最适合阅读 */
+        line-height: 1.7;
+        /* 稍微收紧行高，增强紧凑感 */
+        color: #555;
+        /* 颜色比桌面端稍深，确保小字清晰 */
+        text-align: left;
+        /* 手机端建议左对齐，避开两端对齐产生的奇怪空格 */
+    }
+
     .strengthItem {
         flex-direction: column;
         gap: 0;

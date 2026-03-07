@@ -106,7 +106,7 @@
     position: relative;
     /* 必须，作为伪元素的基准 */
     text-decoration: none;
-    color: #5cc1c9;
+    color: #83afbd;
     font-size: 18px;
     font-family: "Hiragino Mincho ProN", serif;
     letter-spacing: 0.1em;
@@ -125,7 +125,7 @@
     /* 线的长度等于文字长度 */
     height: 1px;
     /* 线的粗细 */
-    background-color: #5cc1c9;
+    background-color: #83afbd;
     /* 线的颜色 */
 
     /* 初始状态：缩放比例为 0，起点在左侧 */

@@ -6,7 +6,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-top: 36px;
+    padding-top: 66px;
 }
 
 .inkBg {
@@ -54,7 +54,7 @@
 .timelineContainer {
     position: relative;
     width: 100%;
-    max-width: 800px;
+    max-width: 850px;
 }
 
 .centerLine {
@@ -71,7 +71,7 @@
     display: flex;
     width: 100%;
     position: relative;
-    margin-bottom: 80px;
+    margin-bottom: 0;
 }
 
 /* 🌟 核心：圆点精准定位在竖线上 */
@@ -87,7 +87,7 @@
     transform: translate(-50%, -50%);
     z-index: 4;
     margin-left: -17.5px;
-    margin-top: -17.5px;
+    margin-top: -37px;
 }
 
 /* 🌟 核心：左右布局 */
@@ -102,6 +102,7 @@
 .contentCard {
     width: 42%;
     position: relative;
+    /* margin-top: 20px; */
 }
 
 .leftSide .contentCard {
@@ -110,8 +111,13 @@
 }
 
 .rightSide .contentCard {
-    text-align: left;
+    text-align: right;
     margin-right: 5%;
+}
+
+.rightSide .itemText {
+    text-align: left;
+    /* 🌟 核心：覆盖掉父级的继承，让正文恢复正常阅读方向 */
 }
 
 /* --- 文字样式 --- */
@@ -119,11 +125,12 @@
     font-size: 0.8rem;
     color: #add8e6;
     letter-spacing: 0.1em;
+
 }
 
 .itemTitle {
-    font-size: 1.8rem;
-    margin: 10px 0;
+    font-size: 20px;
+    margin: 0;
     color: #333;
     font-family: "Hiragino Mincho ProN", serif;
     position: relative;
@@ -163,7 +170,7 @@
 }
 
 .bottomText {
-    margin-top: 16px;
+    margin-top: 92px;
     color: #aaa;
     letter-spacing: 0.2em;
 }
