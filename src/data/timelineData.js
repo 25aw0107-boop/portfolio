@@ -14,7 +14,7 @@ export const timelineData = [
     {
         id: 3,
         tag: "#2024.7",
-        title: "進路を決めて",
+        title: "進路を決める",
         content: ""
     },
     {

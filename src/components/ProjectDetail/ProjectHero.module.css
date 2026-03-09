@@ -7,38 +7,14 @@
     overflow: hidden;
 }
 
-/* 左半边：包含 Logo 和文字 */
+/* 左半边 */
 .leftPane {
     flex: 1;
     position: relative;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    /* 让文字垂直居中 */
-}
-
-/* Logo 必须在左上角 */
-.logoLink {
-    /* 🌟 核心修改：改为固定定位 */
-    position: fixed;
-
-    /* 保持原有的位置参数 */
-    top: 50px;
-    left: 80px;
-    width: 80px;
-    height: 80px;
-
-    /* 🌟 提高层级：确保它在所有滚动内容（包括水墨和图片）之上 */
-    z-index: 1001;
-
-    /* 增加平滑过渡，如果你希望在某些交互下改变 Logo 状态 */
-    transition: all 0.3s ease;
-}
-
-.logoImg {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
+    margin-right: 20px;
 }
 
 /* 文字排版完全对应图 1 */
@@ -58,7 +34,7 @@
 }
 
 .title {
-    font-size: clamp(24px, 3.5vw, 42px);
+    font-size: clamp(24px, 3.5vw, 40px);
     color: #333;
     font-family: "Hiragino Mincho ProN", "Yu Mincho", serif;
     margin: 0 0 15px 0;
@@ -109,7 +85,7 @@
 .rightPane {
     flex: 1;
     height: 100%;
-    margin-right: 5%;
+    margin-right: 4.5%;
 }
 
 .mainImg {
