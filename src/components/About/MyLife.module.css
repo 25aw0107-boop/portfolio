@@ -62,6 +62,7 @@
     color: #333;
     /* 增加一点右边距，给中间的 originTag 留出呼吸感 */
     margin-right: 20px;
+    margin-left: 5%;
 }
 
 .accent {
@@ -80,7 +81,7 @@
     line-height: 2.2;
     margin: 0;
     letter-spacing: 0.05em;
-    margin-left: 36px;
+    
 }
 
 .signature {
