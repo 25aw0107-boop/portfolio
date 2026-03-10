@@ -215,7 +215,7 @@
         height: 25px;
         margin-left: -12.5px;
         /* 宽度的一半，确保中心对齐 */
-        margin-top: 0;
+        margin-top: -12px;
     }
 
     /* 4. 卡片宽度撑满 */
@@ -223,12 +223,14 @@
         width: 90% !important;
         text-align: left !important;
         margin: 0 !important;
+
     }
 
     /* 5. 标题与下划线修正 */
     .itemTitle {
         font-size: 1.4rem;
         /* 移动端字号缩小 */
+        margin-bottom: 14px;
     }
 
     .decorLine {
