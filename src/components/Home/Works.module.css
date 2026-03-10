@@ -199,7 +199,7 @@
     content: '';
     position: absolute;
     top: 50%;
-    width: 66px;
+    width: 62px;
     height: 1px;
     background-color: #a7a7a7;
     transform: translateY(-50%);
@@ -209,7 +209,7 @@
 .workItem:hover .imageOuterCircle::before,
 .workItem:hover .imageOuterCircle::after {
     background-color: #a0dbdf;
-    width: 46px;
+    width: 44px;
 }
 
 .imageOuterCircle::before {
