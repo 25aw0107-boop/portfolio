@@ -63,7 +63,12 @@ export default function Works() {
 
             {/* 下部「すべてを見る」ボタン */}
             <div className={styles.viewAllWrapper}>
-                <Link to="/works" className={styles.viewAllBtn}>
+                <Link
+                    to="/works"
+                    className={styles.viewAllBtn}
+                    target="_blank"           /* 🌟 核心：在新窗口打开 */
+                    rel="noopener noreferrer"  /* 🔒 安全实践：保护原页面性能与安全 */
+                >
                     <div className={styles.arrowCircle}>
                         <span className={styles.arrow}>→</span>
                     </div>

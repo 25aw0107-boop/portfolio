@@ -55,11 +55,16 @@ const Skills = () => {
 
             {/* 🌟 底部按钮：使用你要求的圆圈样式，但通过 wrapper 实现右对齐 */}
             <div className={styles.viewAllWrapper}>
-                <Link to="/about" className={styles.viewAllBtn}> {/* 链接从 /works 改为 /about */}
+                <Link
+                    to="/about"
+                    className={styles.viewAllBtn}
+                    target="_blank"          /* 🌟 核心：在新窗口打开 */
+                    rel="noopener noreferrer" /* 🔒 安全实践：建议加上这个属性 */
+                >
                     <div className={styles.arrowCircle}>
                         <span className={styles.arrow}>→</span>
                     </div>
-                    <span className={styles.viewAllText}>詳しくみる</span> {/* 建议文案改为：了解更多 / 詳しくみる */}
+                    <span className={styles.viewAllText}>詳しくみる</span>
                 </Link>
             </div>
         </section>
