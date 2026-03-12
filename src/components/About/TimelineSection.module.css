@@ -207,15 +207,12 @@
 
     /* 3. 圆点精准压在竖线上 (left: 30px) */
     .node {
-        left: 30px;
-        top: 55px;
+        left: 25px;
+        top: 63px;
         /* 调低一点，对齐第一行 Tag */
         width: 25px;
         /* 移动端圆点稍微调小 */
         height: 25px;
-        margin-left: -12.5px;
-        /* 宽度的一半，确保中心对齐 */
-        margin-top: -12px;
     }
 
     /* 4. 卡片宽度撑满 */
