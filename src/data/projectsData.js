@@ -54,15 +54,11 @@ import intvDetail5 from '../assets/04留学生インタビュー/images/5.png';
 import intvDetail6 from '../assets/04留学生インタビュー/images/6.png';
 
 
-
-
-
-
 export const projectsData = [
     {
         id: 1,
         url: 'https://shinkyu-seisaku.vercel.app/index.html',
-        category: 'web-site', // 🌟 新增这一行，对应 "Webサイト"
+        category: 'web-site',
         tag: '#Website',
         title: '進級制作 ・ 日本湿原PROJECT',
         desc: '一般層に日本の湿原の魅力を伝え、湿原への関心と認知を高めることを目的として制作したスペシャルサイトです。',
@@ -70,8 +66,7 @@ export const projectsData = [
         role: '2025.10',
         img: shinkyuImg,
         heroImg: shinkyuDV,
-        mockupImg: shinkyuMockup, // 🌟 新增
-        // 🌟 新增：项目参数数据
+        mockupImg: shinkyuMockup,
         info: [
             {
                 label: '課題',
@@ -97,7 +92,7 @@ export const projectsData = [
                 label: '使用ツール', value: `HTML5, CSS3, JavaScript (ES6+)
                 Figma / CapCut / Photoshop / VScode ` },
             {
-                label: '制作期間', value: `約３か月
+                label: '制作期間', value: `約3か月(2025年10月〜12月)
                 ( 企画 / 情報設計 3週間、間デザイン 3週間、コーディング 2週間 )` },
         ],
         reflections: [
@@ -123,7 +118,7 @@ export const projectsData = [
     {
         id: 2,
         url: 'https://portfolio-orcin-pi-ma8f57osop.vercel.app/',
-        category: 'web-site', // 🌟 新增这一行，对应 "Webサイト"
+        category: 'web-site',
         tag: '#Website',
         title: 'ポートフォリオサイト',
         desc: '就職活動のために制作したポートフォリオサイト。人事担当者や企業の方に、自分の技術力と人物像を伝えることを目的としています。',
@@ -147,7 +142,7 @@ export const projectsData = [
             {
                 label: '使用ツール', value: `React, JavaScript (ES6+), HTML5, CSS3
                 Figma / Photoshop / VScode ` },
-            { label: '制作期間', value: `2026年2月〜現在( 継続中 )` },
+            { label: '制作期間', value: `約1月(2026年2月〜3月)` },
         ],
         reflections: [
             {
@@ -170,7 +165,7 @@ export const projectsData = [
     {
         id: 3,
         url: 'https://zenki-kadai.vercel.app/',
-        category: 'web-site', // 🌟 新增这一行，对应 "Webサイト"
+        category: 'web-site', // 新增这一行，对应 "项目类型"
         tag: '#Website',
         title: '前期課題・学科の発展',
         desc: '入学を検討している留学生の学科に対する不安を軽減することを目的として制作したスペシャルサイトです。',
@@ -194,7 +189,7 @@ export const projectsData = [
                 label: '使用ツール', value: `HTML5, CSS3, JavaScript (ES6+)
                 Figma / Photoshop / VScode` },
             {
-                label: '制作期間', value: `約３か月
+                label: '制作期間', value: `約3か月(2025年5月〜7月)
                 ( 企画 3週間、間デザイン 3週間、コーディング 3週間 )` },
         ],
         reflections: [
@@ -218,7 +213,7 @@ export const projectsData = [
     {
         id: 4,
         url: '',
-        category: 'video',
+        category: 'video',// 新增这一行，对应 "项目类型"
         tag: '#Interview',
         title: '留学生インタビュー映像',
         desc: 'Webデザイン学科の学び、生活、そして未来への展望。現役留学生の視点から、学科のリアルを伝えるインタビュープロジェクト。',
@@ -227,7 +222,7 @@ export const projectsData = [
         img: interviewIma,
         heroImg: interviewDV,
 
-        // 🌟 这里是重点！
+        // 这里是重点
         mockupImg: interviewMockupImg, // 必须传图片变量，作为视频未播放时的封面
         videoSrc: interviewVideoFile,  // 必须加上这一行！你的播放器需要这个路径
 
