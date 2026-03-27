@@ -142,7 +142,9 @@ export const projectsData = [
             {
                 label: '使用ツール', value: `React, JavaScript (ES6+), HTML5, CSS3
                 Figma / Photoshop / VScode ` },
-            { label: '制作期間', value: `約1月(2026年2月〜3月)` },
+            {
+                label: '制作期間', value: `約1月(2026年2月〜3月)
+                ( 企画 / 情報設計 1週間、間デザイン 1週間、コーディング 2週間 )` },
         ],
         reflections: [
             {
