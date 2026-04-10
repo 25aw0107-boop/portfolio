@@ -16,10 +16,18 @@ export default function App() {
   useEffect(() => {
     // 1. 初始化 Lenis
     const lenis = new Lenis({
-      duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      // 🌟 关键：改用 lerp (0.05 ~ 0.1 之间)，这会让滚动更跟手
+      // lerp 越小越丝滑但越慢，越大越接近原生感觉
+      lerp: 0.1,
+
+      // 🌟 如果用了 lerp，就不再需要 duration 和 easing 了
+      // duration: 1.2,
+      // easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+
+      wheelMultiplier: 1.0,  // 滚轮灵敏度
+      touchMultiplier: 1.5,  // 触控灵敏度（针对触控板和手机）
+      infinite: false,
       smoothWheel: true,
-      touchMultiplier: 2,
     });
 
     window.lenis = lenis;
