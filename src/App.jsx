@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import ProjectDetail from "./pages/ProjectDetail";
 import Works from "./pages/Works";
-// 🌟 核心修复：引入你刚刚新建的 About 页面
+// 核心修复：引入你刚刚新建的 About 页面
 import About from "./pages/About";
 import ScrollToTop from "./components/ScrollToTop";
 import Lenis from '@studio-freight/lenis'
@@ -15,15 +15,14 @@ export default function App() {
 
   useEffect(() => {
     const lenis = new Lenis({
-      // 🌟 核心：数值越小，页面滑得越远、越久（停顿感变弱）
+      // 数值越小，页面滑得越远、越久（停顿感变弱）
       // 建议在 0.05 ~ 0.07 之间尝试。0.05 会非常飘。
       lerp: 0.06,
 
-      // 🌟 增加滚轮和触控的物理力度，解决“推不动”的问题
+      // 增加滚轮和触控的物理力度，解决“推不动”的问题
       wheelMultiplier: 1.2,
       touchMultiplier: 2.0,
 
-      // 保持原生滚动的感觉，但加上平滑过渡
       smoothWheel: true,
       infinite: false,
     });
