@@ -54,6 +54,20 @@ import intvDetail5 from '../assets/04留学生インタビュー/images/5.png';
 import intvDetail6 from '../assets/04留学生インタビュー/images/6.png';
 
 
+// --- 05名刺制作 ---
+// ⚠️ 注意：文件夹名字是 "05名刺"，文件名是 "名刺.jpg"
+import meishiImg from '../assets/05名刺/名刺.jpg';
+import meishiDV from '../assets/05名刺/名刺DV.jpg';
+import meishiMockup from '../assets/05名刺/名刺样机.jpg';
+
+// 图片引入
+import meishiDetail1 from '../assets/05名刺/images/1.jpg';
+import meishiDetail2 from '../assets/05名刺/images/2.jpg';
+import meishiDetail3 from '../assets/05名刺/images/3.jpg';
+import meishiDetail4 from '../assets/05名刺/images/4.jpg';
+import meishiDetail5 from '../assets/05名刺/images/5.jpg';
+import meishiDetail6 from '../assets/05名刺/images/6.jpg';
+
 export const projectsData = [
     {
         id: 1,
@@ -259,5 +273,57 @@ export const projectsData = [
         ],
         // 之后你可以放入采访过程的精彩瞬间截图
         gallery: [intvDetail1, intvDetail2, intvDetail3, intvDetail4, intvDetail5, intvDetail6],
-    }
+    },
+    {
+        id: 5,
+        url: '',
+        category: 'design',
+        tag: '#Graphic',
+        title: '個人用名刺デザイン',
+        desc: 'セルフブランディングの一環として制作した個人用名刺です。',
+        detailDesc: '作品展示会や会社説明会において企業の方と名刺交換を行うために制作した個人用名刺である。また、印刷時に不具合が生じないよう、CMYKカラーモードを用い、Adobe Illustratorで作成している。',
+        role: '2026.4',
+        img: meishiImg,
+        heroImg: meishiDV,
+        mockupImg: meishiMockup,
+
+        info: [
+            {
+                label: '課題', value: `作品展示会や会社説明会において、限られた時間の中で自身の印象を効果的に伝えられる名刺を制作することを課題とした。特に、初対面の相手に対して視認性の高いデザインと、必要な情報が一目で伝わるレイアウトの工夫が求められる。`
+            },
+            {
+                label: 'ターゲット', value: `作品展示会や会社説明会に参加する企業の採用担当者や人事担当者を主なターゲットとする。特に、短時間で多くの学生と接する中でも印象に残りやすく、必要な情報を素早く把握できる名刺を求めている担当者を想定している。`
+            },
+            { label: 'ゴール', value: `作品展示会や会社説明会において、企業の採用担当者に短時間で自身の情報を正確に伝え、印象に残る名刺を完成させることをゴールとした。` },
+            {
+                label: '構成設計', value: `本デザインでは、和風の装飾枠をベースに、全体のバランスと統一感を重視した構成とした。表面は名前と所属情報を中心に配置し、縦書きレイアウトを採用することで落ち着きと個性を表現している。裏面ではメッセージ性を重視し、中央にコンセプトとなる言葉を縦書きで配置し、その周囲をシンボルと装飾で囲むことで、視覚的なインパクトと統一感を持たせた。さらに、余白と装飾のバランスを調整することで、情報量を抑えつつも印象に残るデザインを目指した。`
+            },
+            {
+                label: '使用ツール', value: `Adobe Illustrator`
+            },
+            {
+                label: '制作期間', value: `約4時間`
+            },
+        ],
+
+        reflections: [
+            {
+                title: '今回挑戦したこと',
+                content: `本作品では、縦書きレイアウトを名刺デザインに取り入れ、一般的な横書き名刺とは異なる表現に挑戦した。
+限られたスペースの中で情報の可読性を保ちながら、視線の流れを意識した配置を工夫した点が特徴である。
+また、和風の装飾やシンボルを取り入れつつ、現代的な名刺として成立させるために、装飾と余白のバランス調整にも注力した。
+さらに、CMYKカラーモードを用いた印刷前提のデザイン設計を行い、画面上だけでなく実際の仕上がりを意識した制作に挑戦した。`
+            },
+            {
+                title: '制作後の振り返り',
+                content: `本制作を通して、デザイン性と可読性のバランスを取ることの重要性を改めて実感した。
+特に縦書きレイアウトや装飾要素を取り入れる中で、情報が見づらくならないよう調整する点に苦労した。
+また、CMYKカラーモードを用いたことで、画面上の見え方と印刷時の色味の違いについて理解を深めることができた。
+一方で、装飾と情報の優先順位の整理については、さらに改善の余地があると感じている。今後は、よりシンプルで伝わりやすい構成を意識しながら、デザインの完成度を高めていきたい。`
+            }
+        ],
+        // 之后你可以放入采访过程的精彩瞬间截图
+        gallery: [meishiDetail1, meishiDetail2, meishiDetail3, meishiDetail4, meishiDetail5, meishiDetail6],
+    },
+
 ];
